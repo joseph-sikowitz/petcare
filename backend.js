@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //TODO: swap this structure out for React Router
-app.use("/", express.static("public"));
+app.use("/", express.static("./frontend/dist"));
 app.use("/api", usersRouter);
 
 app.listen(PORT, () => {
