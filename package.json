@@ -1,0 +1,41 @@
+{
+  "name": "petcare",
+  "version": "1.0.0",
+  "description": "PetCare is a business management application that pet care business owners and their clients can use to manage their appointments for all types of care.",
+  "main": "backend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch backend.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joseph-sikowitz/petcare.git"
+  },
+  "keywords": [],
+  "author": "Thai Ken Yong, Joseph Sikowitz",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/joseph-sikowitz/petcare/issues"
+  },
+  "homepage": "https://github.com/joseph-sikowitz/petcare#readme",
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jest": "^29.17.0",
+    "eslint-plugin-prettier": "^5.5.7",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.13.0",
+    "jest": "^30.5.2",
+    "prettier": "^3.9.10"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "unrs-resolver@1.12.2": true
+  }
+}
