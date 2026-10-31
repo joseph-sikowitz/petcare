@@ -1,30 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
+import { getById } from "../database/users.js";
 
 dotenv.config({ quiet: true });
 
 const usersRouter = express.Router();
 
-//For testing only, remove after connecting to db
-const sampleUser = {
-  firstName: "Joe",
-  lastName: "Sikowitz",
-  username: "jsikowitz",
-  password: "1234",
-  businessName: "FLO",
-  addressLine1: "10 Downing Street",
-  addressLine2: "Unit B",
-  city: "Boston",
-  state: "MA",
-  zipCode: "02115",
-  phoneNumber: "617-666-9999",
-  email: "hi@gmail.com",
-  role: "owner",
-};
-
-//For testing only, remove when connected to db
-usersRouter.get("/users", (req, res) => {
-  res.json(sampleUser);
+usersRouter.get("/users/:id", async (req, res) => {
+  try {
+    const record = await getById(req.params.id);
+    return res.status(200).json(record);
+  } catch (error) {
+    console.error("GET for /api/users/:id: ", error);
+    return res.status(500).json({ error: error });
+  }
 });
 
 export default usersRouter;
