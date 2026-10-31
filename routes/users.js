@@ -6,7 +6,13 @@
 import express from "express";
 import dotenv from "dotenv";
 import { ObjectId } from "mongodb";
-import { getCount, getById, getByQuery, postUser } from "../database/users.js";
+import {
+  getCount,
+  getById,
+  getByQuery,
+  postUser,
+  putUser,
+} from "../database/users.js";
 
 dotenv.config({ quiet: true });
 
@@ -55,6 +61,17 @@ usersRouter.post("/users", async (req, res) => {
     return res.status(200).json(postResult);
   } catch (error) {
     console.error("POST for /api/users: ", error.message);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+// PUT existing user
+usersRouter.put("/users/:id", async (req, res) => {
+  try {
+    const putResult = await putUser(req.params.id, req.body);
+    return res.status(200).json(putResult);
+  } catch (error) {
+    console.error("PUT for /api/users: ", error.message);
     return res.status(500).json({ error: error.message });
   }
 });

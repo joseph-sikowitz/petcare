@@ -11,7 +11,7 @@ dotenv.config({ quiet: true });
 
 const connection = db();
 const collection = await connection.getCollection(
-  process.env.MONGODB_COLLECTION_USERS,
+  process.env.MONGODB_COLLECTION_USERS
 );
 
 // Get a count of total user documents in database
@@ -58,28 +58,20 @@ export async function getByQuery(query) {
 // Add a new user to the collection
 export async function postUser(newUser) {
   const {
-    firstName,
-    lastName,
-    username,
-    password,
-    businessName,
-    addressLine1,
-    addressLine2,
-    city,
-    state,
-    zipCode,
-    phoneNumber,
-    email,
-    owner,
+    firstName = null,
+    lastName = null,
+    username = null,
+    password = null,
+    businessName = null,
+    addressLine1 = null,
+    addressLine2 = null,
+    city = null,
+    state = null,
+    zipCode = null,
+    phoneNumber = null,
+    email = null,
+    owner = false,
   } = newUser;
-
-  if (zipCode != null && isNaN(zipCode)) {
-    throw new Error("Zipcode is not a number");
-  }
-
-  if (owner != null && typeof owner != "boolean") {
-    throw new Error("Owner must be boolean type");
-  }
 
   return await collection.insertOne({
     firstName: firstName,
@@ -96,4 +88,47 @@ export async function postUser(newUser) {
     email: email,
     owner: owner,
   });
+}
+
+export async function putUser(id, body) {
+  if (!id) {
+    throw new Error("Must provide user ID for PUT");
+  }
+
+  const {
+    firstName = null,
+    lastName = null,
+    username = null,
+    password = null,
+    businessName = null,
+    addressLine1 = null,
+    addressLine2 = null,
+    city = null,
+    state = null,
+    zipCode = null,
+    phoneNumber = null,
+    email = null,
+    owner = false,
+  } = body;
+
+  return await collection.updateOne(
+    { _id: new ObjectId(id) },
+    {
+      $set: {
+        firstName,
+        lastName,
+        username,
+        password,
+        businessName,
+        addressLine1,
+        addressLine2,
+        city,
+        state,
+        zipCode,
+        phoneNumber,
+        email,
+        owner,
+      },
+    }
+  );
 }
