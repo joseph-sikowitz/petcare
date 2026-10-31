@@ -132,3 +132,7 @@ export async function putUser(id, body) {
     }
   );
 }
+
+export async function deleteUser(id) {
+  return await collection.deleteOne({ _id: new ObjectId(id) });
+}
