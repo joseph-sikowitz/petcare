@@ -5,6 +5,10 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   server: {
+    watch: {
+      usePolling: true,
+      interval: 300,
+    },
     proxy: {
       "/api": {
         target: "http://localhost:3000",
