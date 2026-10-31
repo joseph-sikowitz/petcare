@@ -1,5 +1,5 @@
 export default function UserLogin() {
-    fetch("api/users")
+    fetch("api/users/6ae532e60582be84f6036cae")
     .then(res => res.json())
     .then(data => console.log("User data:", data));
 
