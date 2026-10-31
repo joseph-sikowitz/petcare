@@ -58,3 +58,50 @@ export async function getByQuery(query) {
     console.error("Error executing users query: ", error);
   }
 }
+
+// Add a new user to the collection
+export async function postUser(newUser) {
+  try {
+    const {
+      firstName,
+      lastName,
+      username,
+      password,
+      businessName,
+      addressLine1,
+      addressLine2,
+      city,
+      state,
+      zipCode,
+      phoneNumber,
+      email,
+      owner,
+    } = newUser;
+
+    if (zipCode != null && isNaN(zipCode)) {
+      throw new Error("Zipcode is not a number");
+    }
+
+    if (typeof owner != "boolean") {
+      throw new Error("Owner must be boolean type");
+    }
+
+    return await collection.insertOne({
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      password: password,
+      businessName: businessName,
+      addressLine1: addressLine1,
+      addressLine2: addressLine2,
+      city: city,
+      state: state,
+      zipCode: zipCode,
+      phoneNumber: phoneNumber,
+      email: email,
+      owner: owner,
+    });
+  } catch (error) {
+    console.error("Error posting new user: ", error);
+  }
+}
