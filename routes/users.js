@@ -4,7 +4,6 @@
 */
 
 import express from "express";
-import dotenv from "dotenv";
 import { ObjectId } from "mongodb";
 import {
   getCount,
@@ -14,8 +13,6 @@ import {
   putUser,
   deleteUser,
 } from "../database/users.js";
-
-dotenv.config({ quiet: true });
 
 const usersRouter = express.Router();
 
