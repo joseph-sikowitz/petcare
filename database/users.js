@@ -82,7 +82,7 @@ export async function postUser(newUser) {
       throw new Error("Zipcode is not a number");
     }
 
-    if (typeof owner != "boolean") {
+    if (owner != null && typeof owner != "boolean") {
       throw new Error("Owner must be boolean type");
     }
 

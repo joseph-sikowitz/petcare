@@ -48,6 +48,7 @@ usersRouter.get("/users/:id", async (req, res) => {
   }
 });
 
+// POST new user
 usersRouter.post("/users", async (req, res) => {
   try {
     const postResult = await postUser(req.body);
