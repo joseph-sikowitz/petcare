@@ -6,7 +6,12 @@
 */
 
 import express from "express";
-import { getAllServices, createService, updateService, deleteService } from "../database/businessServicesModel.js";
+import {
+  getAllServices,
+  createService,
+  updateService,
+  deleteService,
+} from "../database/businessServicesModel.js";
 
 const router = express.Router();
 
@@ -60,7 +65,7 @@ router.post("/business/services", async (req, res) => {
   }
 });
 
- // UPDATE: Modify an existing service
+// UPDATE: Modify an existing service
 router.put("/business/services/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -106,7 +111,7 @@ router.put("/business/services/:id", async (req, res) => {
   }
 });
 
- // DELETE: Remove an existing service
+// DELETE: Remove an existing service
 router.delete("/business/services/:id", async (req, res) => {
   try {
     const { id } = req.params;

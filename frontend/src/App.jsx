@@ -7,9 +7,7 @@ function App({ children }) {
     <div className="app-layout">
       <Navbar />
 
-      <main className="app-main">
-        {children}
-      </main>
+      <main className="app-main">{children}</main>
 
       <Footer />
     </div>

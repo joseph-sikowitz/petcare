@@ -41,4 +41,3 @@ export async function deleteService(id) {
   });
   return result.deletedCount > 0;
 }
-
