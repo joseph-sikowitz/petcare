@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import UserLogin from "./components/UserLogin.jsx";
-import BusinessServices from "./components/BusinessServices.jsx";
+import BusinessServices from "./pages/BusinessServices.jsx";
 import "./App.css";
 
 function App() {

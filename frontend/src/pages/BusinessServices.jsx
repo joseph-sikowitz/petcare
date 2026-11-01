@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import BusinessServiceForm from "../components/BusinessServiceForm.jsx";
+import BusinessServiceTable from "../components/BusinessServiceTable.jsx";
 import "./BusinessServices.css";
 
 const API_URL = "/api/business/services";
@@ -174,87 +176,22 @@ function BusinessServices() {
       {message && <p className="services-alert services-success" role="status">{message}</p>}
 
       {showForm && (
-        <div className="services-form-card">
-          <h2>{editingId ? "Edit Service" : "Add New Service"}</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="services-form-grid">
-              <div className="services-field">
-                <label htmlFor="service-name">Service Name</label>
-                <input id="service-name" name="name" type="text" value={formData.name} onChange={handleChange} required />
-              </div>
-              <div className="services-field">
-                <label htmlFor="service-price">Price ($)</label>
-                <input id="service-price" name="price" type="number" min="0" step="0.01" value={formData.price} onChange={handleChange} required />
-              </div>
-              <div className="services-field">
-                <label htmlFor="service-duration">Duration (Minutes)</label>
-                <input id="service-duration" name="durationMinutes" type="number" min="1" step="1" value={formData.durationMinutes} onChange={handleChange} required />
-              </div>
-              <div className="services-field services-checkbox-field">
-                <label htmlFor="service-active">
-                  <input id="service-active" name="isActive" type="checkbox" checked={formData.isActive} onChange={handleChange} />
-                  Active Service
-                </label>
-              </div>
-              <div className="services-field services-full-width">
-                <label htmlFor="service-description">Description</label>
-                <textarea id="service-description" name="description" rows="3" value={formData.description} onChange={handleChange} required />
-              </div>
-            </div>
-            <div className="services-form-actions">
-              <button className="services-btn services-btn-secondary" type="button" onClick={handleCancel} disabled={saving}>Cancel</button>
-              <button className="services-btn services-btn-primary" type="submit" disabled={saving}>
-                {saving ? "Saving..." : editingId ? "Update Service" : "Create Service"}
-              </button>
-            </div>
-          </form>
-        </div>
+        <BusinessServiceForm
+          editingId={editingId}
+          formData={formData}
+          saving={saving}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+        />
       )}
 
-      <div className="services-table-card">
-        <div className="services-table-heading">
-          <h2>All Services</h2>
-          <span>{services.length} services</span>
-        </div>
-        <div className="services-table-wrapper">
-          <table className="services-table">
-            <thead>
-              <tr>
-                <th>Service Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Duration</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {services.map((service) => (
-                <tr key={service._id}>
-                  <td className="services-name">{service.name}</td>
-                  <td>{service.description}</td>
-                  <td>${Number(service.price).toFixed(2)}</td>
-                  <td>{service.durationMinutes} min</td>
-                  <td>
-                    <span className={service.isActive ? "services-status active" : "services-status inactive"}>
-                      {service.isActive ? "Active" : "Inactive"}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="services-row-actions">
-                      <button className="services-btn services-btn-edit" type="button" onClick={() => handleEdit(service)}>Edit</button>
-                      <button className="services-btn services-btn-delete" type="button" onClick={() => handleDelete(service)} disabled={deletingId === service._id}>
-                        {deletingId === service._id ? "Deleting..." : "Delete"}
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {services.length === 0 && <p className="services-empty">No services found. Add your first service!</p>}
-      </div>
+      <BusinessServiceTable
+        services={services}
+        deletingId={deletingId}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
     </section>
   );
 }
