@@ -52,7 +52,7 @@ function buildQuery(query) {
 // Search for users by URL parameters
 export async function getByQuery(query) {
   const mongoQuery = buildQuery(query);
-  return await collection.find(mongoQuery).sort({ name: 1 }).toArray();
+  return await collection.find(mongoQuery).sort({ lastName: 1 }).toArray();
 }
 
 // Add a new user to the collection
