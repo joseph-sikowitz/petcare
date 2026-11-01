@@ -1,17 +1,14 @@
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-import UserLogin from "./components/UserLogin.jsx";
-import BusinessServices from "./pages/BusinessServices.jsx";
 import "./App.css";
 
-function App() {
+function App({ children }) {
   return (
     <div className="app-layout">
       <Navbar />
 
       <main className="app-main">
-        {/* <UserLogin />  */}
-        <BusinessServices />
+        {children}
       </main>
 
       <Footer />
