@@ -1,18 +1,21 @@
+import { Link } from "react-router";
 import "./Navbar.css";
 
 function Navbar() {
   return (
     <header className="site-header">
       <nav className="navbar" aria-label="Main navigation">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           <span className="navbar-logo" aria-hidden="true">🐾</span>
           PetCare
-        </a>
+        </Link>
 
         <div className="navbar-links">
-          <a href="/">Home</a>
-          <a href="/services">Services</a>
-          <a href="/login" className="navbar-login">Log In</a> {/* For Joe login use */}
+          <Link to="/">Home</Link>
+          <Link to="/business/services">Services</Link>
+          <Link to="/login" className="navbar-login">
+            Log In
+          </Link> {/* For Joe login use */}
         </div>
       </nav>
     </header>
