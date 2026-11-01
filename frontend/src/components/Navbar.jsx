@@ -14,7 +14,7 @@ function Navbar() {
 
         <div className="navbar-links">
           <Link to="/">Home</Link>
-          <Link to="/business/services">Services</Link>
+          <Link to="/services">Services</Link>
           <Link to="/login" className="navbar-login">
             Log In
           </Link>{" "}

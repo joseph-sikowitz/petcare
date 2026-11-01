@@ -1,3 +1,9 @@
+/*
+  Author: Thai Ken Yong
+  November 2026
+
+  Business Dashboard - Business after login landing page
+*/
 import "./BusinessDashboard.css";
 
 export default function BusinessDashboard() {
@@ -9,11 +15,6 @@ export default function BusinessDashboard() {
         <a href="/business/appointments">Manage Appointments</a>
         <a href="/business/services">Manage Services</a>
       </div>
-
-      <section className="weekly-appointments">
-        <h2>This Week's Appointments</h2>
-        <p>No appointments to display yet.</p>
-      </section>
     </section>
   );
 }

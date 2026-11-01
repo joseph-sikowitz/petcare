@@ -1,3 +1,10 @@
+/*
+  Author: Thai Ken Yong
+  November 2026
+
+  Business Services - Business Services Page
+*/
+
 import { useEffect, useState } from "react";
 import BusinessServiceForm from "../components/BusinessServiceForm.jsx";
 import BusinessServiceTable from "../components/BusinessServiceTable.jsx";

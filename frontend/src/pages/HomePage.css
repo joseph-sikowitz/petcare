@@ -1,0 +1,61 @@
+/*
+  Author: Thai Ken Yong
+  PetCare Homepage Styling
+*/
+
+.home-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.home-content h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1.5rem;
+}
+
+.home-content p {
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.home-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+
+  .home-content {
+    text-align: center;
+  }
+
+  .home-actions {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,52 @@
+/*
+  Author: Thai Ken Yong
+  November 2026
+
+  Business Service View Only Styling
+*/
+
+.service-view-page h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.service-view-page > p {
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.service-view-page input[type="search"] {
+  display: block;
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.service-view-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.service-view-grid h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.service-view-grid p {
+  color: var(--color-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* Tablet layout */
+@media (max-width: 900px) {
+  .service-view-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .service-view-grid {
+    grid-template-columns: 1fr;
+  }
+}
