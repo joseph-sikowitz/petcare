@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import UserLogin from "./components/UserLogin.jsx";
 import BusinessDashboard from "./pages/BusinessDashboard.jsx";
 import BusinessServices from "./pages/BusinessServices.jsx";
+import BusinessAppointments from "./pages/BusinessAppointments.jsx";
 
 import "./styles/global.css";
 
@@ -18,6 +19,10 @@ createRoot(document.getElementById("root")).render(
           <Route path="/login" element={<UserLogin />} />
           <Route path="/business" element={<BusinessDashboard />} />
           <Route path="/business/services" element={<BusinessServices />} />
+          <Route
+            path="/business/appointments"
+            element={<BusinessAppointments />}
+          />
         </Routes>
       </App>
     </BrowserRouter>
