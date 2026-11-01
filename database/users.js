@@ -11,7 +11,7 @@ dotenv.config({ quiet: true });
 
 const connection = db();
 const collection = await connection.getCollection(
-  process.env.MONGODB_COLLECTION_USERS
+  process.env.MONGODB_COLLECTION_USERS,
 );
 
 // Get a count of total user documents in database

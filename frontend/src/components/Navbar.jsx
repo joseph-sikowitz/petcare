@@ -6,7 +6,9 @@ function Navbar() {
     <header className="site-header">
       <nav className="navbar" aria-label="Main navigation">
         <Link className="navbar-brand" to="/">
-          <span className="navbar-logo" aria-hidden="true">🐾</span>
+          <span className="navbar-logo" aria-hidden="true">
+            🐾
+          </span>
           PetCare
         </Link>
 
@@ -15,7 +17,8 @@ function Navbar() {
           <Link to="/business/services">Services</Link>
           <Link to="/login" className="navbar-login">
             Log In
-          </Link> {/* For Joe login use */}
+          </Link>{" "}
+          {/* For Joe login use */}
         </div>
       </nav>
     </header>

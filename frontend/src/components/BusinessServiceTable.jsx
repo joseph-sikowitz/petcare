@@ -1,9 +1,6 @@
-function BusinessServiceTable({
-  services,
-  deletingId,
-  onEdit,
-  onDelete,
-}) {
+import PropTypes from "prop-types";
+
+function BusinessServiceTable({ services, deletingId, onEdit, onDelete }) {
   return (
     <div className="services-table-card">
       <div className="services-table-heading">
@@ -58,9 +55,7 @@ function BusinessServiceTable({
                       onClick={() => onDelete(service)}
                       disabled={deletingId === service._id}
                     >
-                      {deletingId === service._id
-                        ? "Deleting..."
-                        : "Delete"}
+                      {deletingId === service._id ? "Deleting..." : "Delete"}
                     </button>
                   </div>
                 </td>
@@ -78,5 +73,21 @@ function BusinessServiceTable({
     </div>
   );
 }
+
+BusinessServiceTable.propTypes = {
+  services: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      durationMinutes: PropTypes.number.isRequired,
+      isActive: PropTypes.bool.isRequired,
+    }),
+  ).isRequired,
+  deletingId: PropTypes.string,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default BusinessServiceTable;

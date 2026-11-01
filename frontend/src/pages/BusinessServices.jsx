@@ -13,9 +13,9 @@ const emptyForm = {
 };
 
 function BusinessServices() {
-  const [services, setServices] = useState([]); // State to hold the list of services
-  const [loading, setLoading] = useState(true); // State to track loading status
-  const [error, setError] = useState(""); // State to hold any error messages
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({ ...emptyForm });
   const [editingId, setEditingId] = useState(null);
@@ -46,7 +46,11 @@ function BusinessServices() {
 
   // Fetch services from the backend API when the component mounts
   useEffect(() => {
-    fetchServices();
+    async function loadServices() {
+      await fetchServices();
+    }
+
+    loadServices();
   }, []);
 
   function handleAdd() {
@@ -99,11 +103,19 @@ function BusinessServices() {
       setError("Please enter a name and description.");
       return;
     }
-    if (formData.price === "" || !Number.isFinite(serviceData.price) || serviceData.price < 0) {
+    if (
+      formData.price === "" ||
+      !Number.isFinite(serviceData.price) ||
+      serviceData.price < 0
+    ) {
       setError("Please enter a valid price.");
       return;
     }
-    if (formData.durationMinutes === "" || !Number.isInteger(serviceData.durationMinutes) || serviceData.durationMinutes <= 0) {
+    if (
+      formData.durationMinutes === "" ||
+      !Number.isInteger(serviceData.durationMinutes) ||
+      serviceData.durationMinutes <= 0
+    ) {
       setError("Please enter a positive whole number of minutes.");
       return;
     }
@@ -113,18 +125,27 @@ function BusinessServices() {
       setSaving(true);
       setError("");
       setMessage("");
-      const response = await fetch(isEditing ? `${API_URL}/${editingId}` : API_URL, {
-        method: isEditing ? "PUT" : "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(serviceData),
-      });
+      const response = await fetch(
+        isEditing ? `${API_URL}/${editingId}` : API_URL,
+        {
+          method: isEditing ? "PUT" : "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(serviceData),
+        },
+      );
       if (!response.ok) {
-        throw new Error(isEditing ? "Failed to update service." : "Failed to create service.");
+        throw new Error(
+          isEditing ? "Failed to update service." : "Failed to create service.",
+        );
       }
       handleCancel();
       const refreshed = await fetchServices();
       if (refreshed) {
-        setMessage(isEditing ? "Service updated successfully." : "Service created successfully.");
+        setMessage(
+          isEditing
+            ? "Service updated successfully."
+            : "Service created successfully.",
+        );
       }
     } catch (err) {
       setError(err.message);
@@ -141,7 +162,9 @@ function BusinessServices() {
       setDeletingId(service._id);
       setError("");
       setMessage("");
-      const response = await fetch(`${API_URL}/${service._id}`, { method: "DELETE" });
+      const response = await fetch(`${API_URL}/${service._id}`, {
+        method: "DELETE",
+      });
       if (!response.ok) {
         throw new Error("Failed to delete service.");
       }
@@ -167,13 +190,25 @@ function BusinessServices() {
           <h1>Manage Services</h1>
           <p>Add, update, and manage the services offered by your business.</p>
         </div>
-        <button className="services-btn services-btn-primary" type="button" onClick={handleAdd}>
+        <button
+          className="services-btn services-btn-primary"
+          type="button"
+          onClick={handleAdd}
+        >
           + Add Service
         </button>
       </div>
 
-      {error && <p className="services-alert services-error" role="alert">{error}</p>}
-      {message && <p className="services-alert services-success" role="status">{message}</p>}
+      {error && (
+        <p className="services-alert services-error" role="alert">
+          {error}
+        </p>
+      )}
+      {message && (
+        <p className="services-alert services-success" role="status">
+          {message}
+        </p>
+      )}
 
       {showForm && (
         <BusinessServiceForm

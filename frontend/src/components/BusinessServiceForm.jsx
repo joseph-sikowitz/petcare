@@ -39,9 +39,7 @@ function BusinessServiceForm({
           </div>
 
           <div className="services-field">
-            <label htmlFor="service-duration">
-              Duration (Minutes)
-            </label>
+            <label htmlFor="service-duration">Duration (Minutes)</label>
             <input
               id="service-duration"
               name="durationMinutes"
@@ -68,9 +66,7 @@ function BusinessServiceForm({
           </div>
 
           <div className="services-field services-full-width">
-            <label htmlFor="service-description">
-              Description
-            </label>
+            <label htmlFor="service-description">Description</label>
             <textarea
               id="service-description"
               name="description"
