@@ -4,11 +4,15 @@
 */
 
 import express from "express";
-import dotenv from "dotenv";
 import { ObjectId } from "mongodb";
-import { getCount, getById, getByQuery } from "../database/users.js";
-
-dotenv.config({ quiet: true });
+import {
+  getCount,
+  getById,
+  getByQuery,
+  postUser,
+  putUser,
+  deleteUser,
+} from "../database/users.js";
 
 const usersRouter = express.Router();
 
@@ -18,8 +22,8 @@ usersRouter.get("/users/count", async (req, res) => {
     const count = await getCount();
     return res.status(200).json({ usersTotal: count });
   } catch (error) {
-    console.error("Error getting users count: ", error);
-    return res.status(500).json({ error: error });
+    console.error("Error getting users count: ", error.message);
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -29,22 +33,79 @@ usersRouter.get("/users", async (req, res) => {
     const queryResult = await getByQuery(req.query);
     return res.status(200).json(queryResult);
   } catch (error) {
-    console.error("Error getting users by query: ", error);
-    return res.status(500).json({ error: error });
+    console.error("Error getting users by query: ", error.message);
+    return res.status(500).json({ error: error.message });
   }
 });
 
 // GET users by ID
 usersRouter.get("/users/:id", async (req, res) => {
   try {
+    // Check if passed ID is valid and throw 422 if not
     if (!ObjectId.isValid(req.params.id)) {
-      throw new Error("ObjectId invalid");
+      const error = new Error("ObjectId invalid");
+      error.code = 422;
+      throw error;
     }
     const record = await getById(req.params.id);
     return res.status(200).json(record);
   } catch (error) {
-    console.error("GET for /api/users/:id: ", error);
-    return res.status(500).json({ error: error });
+    console.error("GET for /api/users/:id: ", error.message);
+    if (!error.code) {
+      return res.status(500).json({ error: error.message });
+    }
+    return res.status(error.code).json({ error: error.message });
+  }
+});
+
+// POST new user
+usersRouter.post("/users", async (req, res) => {
+  try {
+    const postResult = await postUser(req.body);
+    return res.status(200).json(postResult);
+  } catch (error) {
+    console.error("POST for /api/users: ", error.message);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+// PUT existing user
+usersRouter.put("/users/:id", async (req, res) => {
+  try {
+    // Check if passed ID is valid and throw 422 if not
+    if (!ObjectId.isValid(req.params.id)) {
+      const error = new Error("ObjectId invalid");
+      error.code = 422;
+      throw error;
+    }
+    const putResult = await putUser(req.params.id, req.body);
+    return res.status(200).json(putResult);
+  } catch (error) {
+    console.error("PUT for /api/users: ", error.message);
+    if (!error.code) {
+      return res.status(500).json({ error: error.message });
+    }
+    return res.status(error.code).json({ error: error.message });
+  }
+});
+
+// DELETE existing user
+usersRouter.delete("/users/:id", async (req, res) => {
+  try {
+    // Check if passed ID is valid and throw 422 if not
+    if (!ObjectId.isValid(req.params.id)) {
+      const error = new Error("ObjectId invalid");
+      error.code = 422;
+      throw error;
+    }
+    const deleteResult = await deleteUser(req.params.id);
+    return res.status(200).json(deleteResult);
+  } catch (error) {
+    console.error("DELETE for /api/users: ", error.message);
+    if (!error.code) {
+      return res.status(500).json({ error: error.message });
+    }
+    return res.status(error.code).json({ error: error.message });
   }
 });
 

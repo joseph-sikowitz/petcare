@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import path from "node:path";
 
 import usersRouter from "./routes/users.js";
+import petsRouter from "./routes/pets.js";
 import businessServicesRouter from "./routes/businessServicesRoutes.js";
 import businessAppointmentsRouter from "./routes/businessAppointmentsRoutes.js";
 
@@ -20,6 +21,7 @@ app.use(express.static("./frontend/dist"));
 
 // Backend API routes
 app.use("/api", usersRouter);
+app.use("/api", petsRouter);
 app.use("/api", businessServicesRouter);
 app.use("/api", businessAppointmentsRouter);
 

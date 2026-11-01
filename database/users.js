@@ -51,10 +51,88 @@ function buildQuery(query) {
 
 // Search for users by URL parameters
 export async function getByQuery(query) {
-  try {
-    const mongoQuery = buildQuery(query);
-    return await collection.find(mongoQuery).sort({ name: 1 }).toArray();
-  } catch (error) {
-    console.error("Error executing users query: ", error);
+  const mongoQuery = buildQuery(query);
+  return await collection.find(mongoQuery).sort({ lastName: 1 }).toArray();
+}
+
+// Add a new user to the collection
+export async function postUser(newUser) {
+  const {
+    firstName = null,
+    lastName = null,
+    username = null,
+    password = null,
+    businessName = null,
+    addressLine1 = null,
+    addressLine2 = null,
+    city = null,
+    state = null,
+    zipCode = null,
+    phoneNumber = null,
+    email = null,
+    owner = false,
+  } = newUser;
+
+  return await collection.insertOne({
+    firstName: firstName,
+    lastName: lastName,
+    username: username,
+    password: password,
+    businessName: businessName,
+    addressLine1: addressLine1,
+    addressLine2: addressLine2,
+    city: city,
+    state: state,
+    zipCode: zipCode,
+    phoneNumber: phoneNumber,
+    email: email,
+    owner: owner,
+  });
+}
+
+export async function putUser(id, body) {
+  if (!id) {
+    throw new Error("Must provide user ID for PUT");
   }
+
+  const {
+    firstName = null,
+    lastName = null,
+    username = null,
+    password = null,
+    businessName = null,
+    addressLine1 = null,
+    addressLine2 = null,
+    city = null,
+    state = null,
+    zipCode = null,
+    phoneNumber = null,
+    email = null,
+    owner = false,
+  } = body;
+
+  return await collection.updateOne(
+    { _id: new ObjectId(id) },
+    {
+      $set: {
+        firstName,
+        lastName,
+        username,
+        password,
+        businessName,
+        addressLine1,
+        addressLine2,
+        city,
+        state,
+        zipCode,
+        phoneNumber,
+        email,
+        owner,
+      },
+    }
+  );
+}
+
+export async function deleteUser(id) {
+  return await collection.deleteOne({ _id: new ObjectId(id) });
 }
