@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import UserLogin from "./components/UserLogin.jsx";
+import BusinessServices from "./components/BusinessServices.jsx";
 import "./App.css";
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
       <Navbar />
 
       <main className="app-main">
-        <UserLogin />
+        {/* <UserLogin />  */}
+        <BusinessServices />
       </main>
 
       <Footer />
