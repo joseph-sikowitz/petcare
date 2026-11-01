@@ -14,12 +14,12 @@ const collection = await connection.getCollection(
   process.env.MONGODB_COLLECTION_PETS
 );
 
-// Get a count of total user documents in database
+// Get a count of total pet documents in database
 export async function getCount() {
   return await collection.countDocuments({});
 }
 
-// Get a single user by ObjectId
+// Get a single pet by ObjectId
 export async function getById(id) {
   return await collection.findOne({ _id: new ObjectId(id) });
 }
@@ -43,13 +43,13 @@ function buildQuery(query) {
   return mongoQuery;
 }
 
-// Search for users by URL parameters
+// Search for pets by URL parameters
 export async function getByQuery(query) {
   const mongoQuery = buildQuery(query);
   return await collection.find(mongoQuery).sort({ name: 1 }).toArray();
 }
 
-// Add a new user to the collection
+// Add a new pet to the collection
 export async function postPet(newPet) {
   const {
     name = null,
@@ -60,16 +60,22 @@ export async function postPet(newPet) {
     user_id = null,
   } = newPet;
 
+  let isoDate = birthdate;
+  if (isoDate != null) {
+    isoDate = new Date(isoDate);
+  }
+
   return await collection.insertOne({
     name: name,
     species: species,
     breed: breed,
     medicines: medicines,
-    birthdate: birthdate,
-    user_id: user_id,
+    birthdate: isoDate,
+    user_id: new ObjectId(user_id),
   });
 }
 
+// Update existing pet by ID
 export async function putPet(id, body) {
   if (!id) {
     throw new Error("Must provide pet ID for PUT");
@@ -84,6 +90,16 @@ export async function putPet(id, body) {
     user_id = null,
   } = body;
 
+  let isoDate = birthdate;
+  if (isoDate != null) {
+    isoDate = new Date(isoDate);
+  }
+
+  let userId = user_id;
+  if (user_id != null) {
+    userId = new ObjectId(userId);
+  }
+
   return await collection.updateOne(
     { _id: new ObjectId(id) },
     {
@@ -92,13 +108,14 @@ export async function putPet(id, body) {
         species,
         breed,
         medicines,
-        birthdate,
-        user_id,
+        isoDate,
+        userId,
       },
     }
   );
 }
 
+// Delete pet by ID
 export async function deletePet(id) {
   return await collection.deleteOne({ _id: new ObjectId(id) });
 }

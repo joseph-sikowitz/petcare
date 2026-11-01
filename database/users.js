@@ -90,6 +90,7 @@ export async function postUser(newUser) {
   });
 }
 
+// Update existing user by ID
 export async function putUser(id, body) {
   if (!id) {
     throw new Error("Must provide user ID for PUT");
@@ -133,6 +134,7 @@ export async function putUser(id, body) {
   );
 }
 
+// Delete user by ID
 export async function deleteUser(id) {
   return await collection.deleteOne({ _id: new ObjectId(id) });
 }
