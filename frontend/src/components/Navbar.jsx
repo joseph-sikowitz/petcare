@@ -1,9 +1,12 @@
 import { Link } from "react-router";
-import PropTypes from "prop-types";
+
+import { useUser } from "../context/UserContext.jsx";
 
 import "./Navbar.css";
 
-function Navbar({ user }) {
+function Navbar() {
+  const user = useUser();
+
   return (
     <header className="site-header">
       <nav className="navbar" aria-label="Main navigation">
@@ -30,23 +33,5 @@ function Navbar({ user }) {
     </header>
   );
 }
-
-Navbar.propTypes = {
-  user: PropTypes.shape({
-  _id: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  businessName: PropTypes.string,
-  addressLine1: PropTypes.string,
-  addressLine2: PropTypes.string,
-  city: PropTypes.string,
-  state: PropTypes.string,
-  zipCode: PropTypes.string,
-  phoneNumber: PropTypes.string,
-  owner: PropTypes.bool,
-}),
-};
 
 export default Navbar;

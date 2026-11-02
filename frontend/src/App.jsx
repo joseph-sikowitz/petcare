@@ -3,7 +3,10 @@ import Footer from "./components/Footer.jsx";
 
 import { useState, useEffect } from "react";
 
+import { UserContext } from "./context/UserContext.jsx";
+
 import "./App.css";
+
 
 function App({ children }) {
   const [user, setUser] = useState(null);
@@ -27,13 +30,15 @@ function App({ children }) {
   }, []);
 
   return (
+    <UserContext.Provider value={user}>
     <div className="app-layout">
-      <Navbar user={user} />
+      <Navbar />
 
       <main className="app-main">{children}</main>
 
       <Footer />
     </div>
+    </UserContext.Provider>
   );
 }
 
