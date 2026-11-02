@@ -1,0 +1,12 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+
+  UserLogin styling
+*/
+
+div.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
