@@ -1,7 +1,17 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+  
+  Backend server
+*/
+
 import express from "express";
+import session from "express-session";
 import dotenv from "dotenv";
 import path from "node:path";
+import passport from "./config/passport.js";
 
+import authRouter from "./routes/auth.js";
 import usersRouter from "./routes/users.js";
 import petsRouter from "./routes/pets.js";
 import businessServicesRouter from "./routes/businessServicesRoutes.js";
@@ -16,6 +26,24 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Session config
+app.use(
+  session({
+    secret: "put-secret-key-here",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false, // TODO: set to true in prod
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
+
+// Initialize Passport and session
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Serve the React production build
 app.use(express.static("./frontend/dist"));
 
@@ -24,6 +52,8 @@ app.use("/api", usersRouter);
 app.use("/api", petsRouter);
 app.use("/api", businessServicesRouter);
 app.use("/api", businessAppointmentsRouter);
+
+app.use("/api/auth", authRouter);
 
 // Return React's index.html for frontend routes
 app.get("/{*path}", (req, res) => {
