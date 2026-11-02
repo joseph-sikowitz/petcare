@@ -6,9 +6,9 @@
 import express from "express";
 import { ObjectId } from "mongodb";
 import {
-  getCount,
-  getById,
-  getByQuery,
+  getUserCount,
+  getUserById,
+  getUserByQuery,
   postUser,
   putUser,
   deleteUser,
@@ -19,7 +19,7 @@ const usersRouter = express.Router();
 // GET for total users documents
 usersRouter.get("/users/count", async (req, res) => {
   try {
-    const count = await getCount();
+    const count = await getUserCount();
     return res.status(200).json({ usersTotal: count });
   } catch (error) {
     console.error("Error getting users count: ", error.message);
@@ -30,7 +30,7 @@ usersRouter.get("/users/count", async (req, res) => {
 // GET users by query
 usersRouter.get("/users", async (req, res) => {
   try {
-    const queryResult = await getByQuery(req.query);
+    const queryResult = await getUserByQuery(req.query);
     return res.status(200).json(queryResult);
   } catch (error) {
     console.error("Error getting users by query: ", error.message);
@@ -47,7 +47,7 @@ usersRouter.get("/users/:id", async (req, res) => {
       error.code = 422;
       throw error;
     }
-    const record = await getById(req.params.id);
+    const record = await getUserById(req.params.id);
     return res.status(200).json(record);
   } catch (error) {
     console.error("GET for /api/users/:id: ", error.message);

@@ -15,12 +15,12 @@ const collection = await connection.getCollection(
 );
 
 // Get a count of total pet documents in database
-export async function getCount() {
+export async function getPetCount() {
   return await collection.countDocuments({});
 }
 
 // Get a single pet by ObjectId
-export async function getById(id) {
+export async function getPetById(id) {
   return await collection.findOne({ _id: new ObjectId(id) });
 }
 
@@ -44,7 +44,7 @@ function buildQuery(query) {
 }
 
 // Search for pets by URL parameters
-export async function getByQuery(query) {
+export async function getPetByQuery(query) {
   const mongoQuery = buildQuery(query);
   return await collection.find(mongoQuery).sort({ name: 1 }).toArray();
 }

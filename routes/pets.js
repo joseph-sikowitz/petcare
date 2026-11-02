@@ -6,9 +6,9 @@
 import express from "express";
 import { ObjectId } from "mongodb";
 import {
-  getCount,
-  getById,
-  getByQuery,
+  getPetCount,
+  getPetById,
+  getPetByQuery,
   postPet,
   putPet,
   deletePet,
@@ -19,7 +19,7 @@ const petsRouter = express.Router();
 // GET for total pets documents
 petsRouter.get("/pets/count", async (req, res) => {
   try {
-    const count = await getCount();
+    const count = await getPetCount();
     return res.status(200).json({ petsTotal: count });
   } catch (error) {
     console.error("Error getting pets count: ", error.message);
@@ -30,7 +30,7 @@ petsRouter.get("/pets/count", async (req, res) => {
 // GET pets by query
 petsRouter.get("/pets", async (req, res) => {
   try {
-    const queryResult = await getByQuery(req.query);
+    const queryResult = await getPetByQuery(req.query);
     return res.status(200).json(queryResult);
   } catch (error) {
     console.error("Error getting pets by query: ", error.message);
@@ -47,7 +47,7 @@ petsRouter.get("/pets/:id", async (req, res) => {
       error.code = 422;
       throw error;
     }
-    const record = await getById(req.params.id);
+    const record = await getPetById(req.params.id);
     return res.status(200).json(record);
   } catch (error) {
     console.error("GET for /api/pets/:id: ", error.message);

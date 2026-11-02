@@ -15,12 +15,12 @@ const collection = await connection.getCollection(
 );
 
 // Get a count of total user documents in database
-export async function getCount() {
+export async function getUserCount() {
   return await collection.countDocuments({});
 }
 
 // Get a single user by ObjectId
-export async function getById(id) {
+export async function getUserById(id) {
   return await collection.findOne({ _id: new ObjectId(id) });
 }
 
@@ -50,7 +50,7 @@ function buildQuery(query) {
 }
 
 // Search for users by URL parameters
-export async function getByQuery(query) {
+export async function getUserByQuery(query) {
   const mongoQuery = buildQuery(query);
   return await collection.find(mongoQuery).sort({ lastName: 1 }).toArray();
 }
@@ -137,4 +137,9 @@ export async function putUser(id, body) {
 // Delete user by ID
 export async function deleteUser(id) {
   return await collection.deleteOne({ _id: new ObjectId(id) });
+}
+
+// Used for authentication
+export async function findUserByUsername(username) {
+  return await collection.findOne({ username: username });
 }
