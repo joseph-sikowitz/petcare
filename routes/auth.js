@@ -42,7 +42,7 @@ router.post("/register", async (req, res) => {
     // Check if user already exists
     const existingUser = await getUserByUsername(username);
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      res.redirect("/login?msg='User already exists'");
     }
 
     // Hash password
@@ -74,10 +74,7 @@ router.post("/register", async (req, res) => {
     // Don't send password back
     delete result.password;
 
-    res.status(201).json({
-      message: "User created successfully",
-      result,
-    });
+    res.redirect("/login");
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }

@@ -1,8 +1,6 @@
 import "./UserRegisterForm.css";
 
 //TODO: change CSS to be register specific
-//TODO: add link to login screen if already registered
-//TODO: deal with leading 0 issue in zipcode in form
 
 export default function UserRegisterForm() {
   return (

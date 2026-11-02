@@ -1,8 +1,13 @@
+import { useSearchParams } from "react-router";
+
 import "./UserLoginForm.css";
 
 //TODO: style registration link
 
 export default function UserLoginForm() {
+  const [msgParams] = useSearchParams();
+  const msg = msgParams.get('msg');
+
   return (
     <div className="petcare-card userlogin-form-card">
       <h2>Enter login information</h2>
@@ -41,7 +46,8 @@ export default function UserLoginForm() {
           </div>
         </div>
       </form>
-      <p>No account? <a href="/register">Register here.</a></p>
+      <p>No account? <a href="/register">Register here</a></p>
+      {msg ? (<div className="alert warning">{msg.replace(/'/g, '')}</div>) : (<div></div>)}
     </div>
   );
 }
