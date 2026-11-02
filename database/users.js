@@ -140,6 +140,6 @@ export async function deleteUser(id) {
 }
 
 // Used for authentication
-export async function findUserByUsername(username) {
+export async function getUserByUsername(username) {
   return await collection.findOne({ username: username });
 }
