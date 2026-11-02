@@ -36,13 +36,17 @@ router.post("/register", async (req, res) => {
 
     // Validation
     if (!username || !password || !firstName || !lastName || !email) {
-      return res.status(400).json({ message: "All fields are required" });
+      res.redirect(
+        "/login?msg='Must include username, password, first name, last name, and email'"
+      );
+      return;
     }
 
     // Check if user already exists
     const existingUser = await getUserByUsername(username);
     if (existingUser) {
-      res.redirect("/login?msg='User already exists'");
+      res.redirect("/login?msg='Username already exists'");
+      return;
     }
 
     // Hash password
