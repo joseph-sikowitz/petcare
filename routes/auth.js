@@ -106,14 +106,14 @@ router.get("/user", isAuthenticated, (req, res) => {
 });
 
 // Logout endpoint
-router.post("/logout", (req, res) => {
+router.get("/logout", (req, res) => {
   req.logout((err) => {
     if (err) {
       return res
         .status(500)
         .json({ message: "Logout failed", error: err.message });
     }
-    res.json({ message: "Logout successful" });
+    res.redirect("/");
   });
 });
 
