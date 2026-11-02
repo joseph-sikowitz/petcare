@@ -18,10 +18,24 @@ const router = express.Router();
 // Register endpoint
 router.post("/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const {
+      firstName = null,
+      lastName = null,
+      username = null,
+      password = null,
+      businessName = null,
+      addressLine1 = null,
+      addressLine2 = null,
+      city = null,
+      state = null,
+      zipCode = null,
+      phoneNumber = null,
+      email = null,
+      owner = false,
+    } = req.body;
 
     // Validation
-    if (!username || !password) {
+    if (!username || !password || !firstName || !lastName || !email) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -34,10 +48,27 @@ router.post("/register", async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Convert owner to boolean
+    let boolOwner = false;
+    if (owner === "on") {
+      boolOwner = true;
+    }
+
     // Create user
     const result = await postUser({
       username,
       password: hashedPassword,
+      firstName,
+      lastName,
+      businessName,
+      addressLine1,
+      addressLine2,
+      city,
+      state,
+      zipCode,
+      phoneNumber,
+      email,
+      owner: boolOwner,
     });
 
     // Don't send password back

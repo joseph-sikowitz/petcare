@@ -31,7 +31,7 @@ const strategy = new LocalStrategy(
       return done(null, user);
     } catch (error) {
       // Case 1. There is an error
-      done(error);
+      return done(error);
     }
   }
 );

@@ -1,0 +1,29 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+
+  UserLoginForm.jsx styling
+*/
+
+.userlogin-form-card {
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.userlogin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.userlogin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.userlogin-field label {
+  font-weight: 600;
+  color: #333;
+}

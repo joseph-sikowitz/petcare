@@ -1,11 +1,13 @@
 import "./UserLoginForm.css";
 
-export default function UserLoginForm({ onSubmit, onCancel, onChange }) {
+//TODO: style registration link
+
+export default function UserLoginForm() {
   return (
     <div className="petcare-card userlogin-form-card">
       <h2>Enter login information</h2>
 
-      <form onSubmit={onSubmit}>
+      <form method="POST" action="/api/auth/login">
         <div className="userlogin-form-grid">
           <div className="userlogin-field">
             <label htmlFor="username">Username</label>
@@ -14,7 +16,6 @@ export default function UserLoginForm({ onSubmit, onCancel, onChange }) {
               name="username"
               type="text"
               placeholder="Enter username"
-              onChange={onChange}
               required
             />
           </div>
@@ -26,7 +27,6 @@ export default function UserLoginForm({ onSubmit, onCancel, onChange }) {
               name="password"
               type="password"
               placeholder="Enter password"
-              onChange={onChange}
               required
             />
           </div>
@@ -36,19 +36,12 @@ export default function UserLoginForm({ onSubmit, onCancel, onChange }) {
               className="services-btn services-btn-primary"
               type="submit"
             >
-              Submit
-            </button>
-
-            <button
-              className="services-btn services-btn-secondary"
-              type="button"
-              onClick={onCancel}
-            >
-              Cancel
+              Login
             </button>
           </div>
         </div>
       </form>
+      <p>No account? <a href="/register">Register here.</a></p>
     </div>
   );
 }

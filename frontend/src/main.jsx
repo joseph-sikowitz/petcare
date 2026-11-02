@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import App from "./App.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import UserLogin from "./pages/UserLogin.jsx";
+import UserRegister from "./pages/UserRegister.jsx";
 import BusinessDashboard from "./pages/BusinessDashboard.jsx";
 import BusinessServices from "./pages/BusinessServices.jsx";
 import BusinessAppointments from "./pages/BusinessAppointments.jsx";
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<UserLogin />} />
+          <Route path="/register" element={<UserRegister />} />
           <Route path="/services" element={<BusinessServiceViewOnly />} />
           <Route path="/business/dashboard" element={<BusinessDashboard />} />
           <Route path="/business" element={<BusinessDashboard />} />
