@@ -22,7 +22,7 @@ function Navbar() {
           <Link to="/services">Services</Link>
           {user ? (
             <>
-              {<Link to="/profile">Profile</Link>}
+              {<Link to="/dashboard">Dashboard</Link>}
               <a href="/api/auth/logout">Logout</a>
               <div> Welcome, {user.firstName} {user.lastName}!</div>
             </>) : (
