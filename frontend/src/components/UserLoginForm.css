@@ -57,10 +57,18 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .userlogin-btn-primary {
   background-color: #367fa6;
   color: white;
+}
+
+.userlogin-btn:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+  transform: translateY(-1px);
 }
