@@ -5,25 +5,47 @@
   UserRegisterForm.jsx styling
 */
 
-.userlogin-form-card {
+.userregister-form-card {
   width: 100%;
   max-width: 480px;
   margin-inline: auto;
 }
 
-.userlogin-form-grid {
+.userregister-form-grid {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 20px;
 }
 
-.userlogin-field {
+.userregister-field {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.userlogin-field label {
+.userregister-field label {
   font-weight: 600;
   color: #333;
+}
+
+.userregister-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.userregister-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.userregister-btn-primary {
+  background-color: #367fa6;
+  color: white;
 }

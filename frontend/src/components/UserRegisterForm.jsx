@@ -4,12 +4,12 @@ import "./UserRegisterForm.css";
 
 export default function UserRegisterForm() {
   return (
-    <div className="petcare-card userlogin-form-card">
+    <div className="petcare-card userregister-form-card">
       <h2>Register new user</h2>
 
       <form method="POST" action="/api/auth/register">
-        <div className="userlogin-form-grid">
-          <div className="userlogin-field">
+        <div className="userregister-form-grid">
+          <div className="userregister-field">
             <label htmlFor="username">Username</label>
             <input
               id="username"
@@ -20,7 +20,7 @@ export default function UserRegisterForm() {
             />
           </div>
 
-          <div className="userlogin-field">
+          <div className="userregister-field">
             <label htmlFor="password">Password</label>
             <input
               id="password"
@@ -31,7 +31,7 @@ export default function UserRegisterForm() {
             />
           </div>
 
-          <div className="userlogin-field">
+          <div className="userregister-field">
             <label htmlFor="firstName">First Name</label>
             <input
               id="firstName"
@@ -42,7 +42,7 @@ export default function UserRegisterForm() {
             />
           </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="lastName">Last Name</label>
             <input
               id="lastName"
@@ -53,7 +53,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="businessName">Business Name</label>
             <input
               id="businessName"
@@ -63,7 +63,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="addressLine1">Address Line 1</label>
             <input
               id="addressLine1"
@@ -73,7 +73,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="addressLine2">Address Line 2</label>
             <input
               id="addressLine2"
@@ -83,7 +83,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="city">City</label>
             <input
               id="city"
@@ -93,7 +93,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="state">State</label>
             <input
               id="state"
@@ -103,7 +103,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="zipCode">Zipcode</label>
             <input
               id="zipCode"
@@ -117,7 +117,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="phoneNumber">Phone Number</label>
             <input
               id="phoneNumber"
@@ -128,7 +128,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -139,7 +139,7 @@ export default function UserRegisterForm() {
             />
             </div>
 
-            <div className="userlogin-field">
+            <div className="userregister-field">
             <label htmlFor="owner">Business owner</label>
             <input
               id="owner"
@@ -148,9 +148,9 @@ export default function UserRegisterForm() {
             />
             </div>
 
-          <div className="services-form-actions">
+          <div className="userregister-form-actions">
             <button
-              className="services-btn services-btn-primary"
+              className="userregister-btn userregister-btn-primary"
               type="submit"
             >
               Register
