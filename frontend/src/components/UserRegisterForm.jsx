@@ -1,3 +1,10 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+
+  User register form component
+*/
+
 import "./UserRegisterForm.css";
 
 //TODO: change CSS to be register specific

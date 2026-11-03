@@ -1,3 +1,10 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+
+  User login form component
+*/
+
 import { useSearchParams } from "react-router";
 
 import "./UserLoginForm.css";
