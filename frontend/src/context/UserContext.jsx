@@ -8,3 +8,12 @@ export const useUser = () => {
     }
     return context;
 };
+
+/* Ken: This version will work for my page, can you test if you use this will work for you?
+import { useContext, createContext } from "react";
+
+export const UserContext = createContext(undefined);
+
+export const useUser = () => {
+  return useContext(UserContext);
+}; */

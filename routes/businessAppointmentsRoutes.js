@@ -14,11 +14,17 @@ import {
   searchCustomers,
   getPetsByCustomer,
 } from "../database/businessAppointmentsModel.js";
+import { isAuthenticated } from "../middleware/auth.js";
 
 const router = express.Router();
 
 // READ: Retrieve appointments by date and optional status
-router.get("/business/appointments", async (req, res) => {
+router.get("/business/appointments", isAuthenticated, async (req, res) => {
+  if (req.user?.owner !== true) {
+    return res.status(403).json({
+      error: "Business access required",
+    });
+  }
   try {
     const { date, status, startTime, endTime } = req.query;
 
@@ -33,18 +39,19 @@ router.get("/business/appointments", async (req, res) => {
       (endTime !== undefined &&
         (typeof endTime !== "string" ||
           !Number.isFinite(Date.parse(endTime)))) ||
-      ((startTime === undefined) !== (endTime === undefined)) ||
-      (startTime !== undefined &&
-        new Date(startTime) >= new Date(endTime))
+      (startTime === undefined) !== (endTime === undefined) ||
+      (startTime !== undefined && new Date(startTime) >= new Date(endTime))
     ) {
-      return res.status(400).json({ error: "Invalid date, status, or time range" });
+      return res
+        .status(400)
+        .json({ error: "Invalid date, status, or time range" });
     }
 
     const appointments = await getAppointmentsByDate(
       date,
       status,
       startTime,
-      endTime,
+      endTime
     );
     return res.json(appointments);
   } catch (error) {
@@ -54,26 +61,41 @@ router.get("/business/appointments", async (req, res) => {
 });
 
 // READ: Search customers by name
-router.get("/business/appointments/customers", async (req, res) => {
-  try {
-    const { search } = req.query;
-
-    if (typeof search !== "string" || !search.trim()) {
-      return res.json([]);
+router.get(
+  "/business/appointments/customers",
+  isAuthenticated,
+  async (req, res) => {
+    if (req.user?.owner !== true) {
+      return res.status(403).json({
+        error: "Business access required",
+      });
     }
+    try {
+      const { search } = req.query;
 
-    const customers = await searchCustomers(search.trim());
-    return res.json(customers);
-  } catch (error) {
-    console.error("Error searching customers:", error);
-    return res.status(500).json({ error: "Failed to search customers" });
+      if (typeof search !== "string" || !search.trim()) {
+        return res.json([]);
+      }
+
+      const customers = await searchCustomers(search.trim());
+      return res.json(customers);
+    } catch (error) {
+      console.error("Error searching customers:", error);
+      return res.status(500).json({ error: "Failed to search customers" });
+    }
   }
-});
+);
 
 // READ: Retrieve pets belonging to a customer
 router.get(
   "/business/appointments/customers/:userId/pets",
+  isAuthenticated,
   async (req, res) => {
+    if (req.user?.owner !== true) {
+      return res.status(403).json({
+        error: "Business access required",
+      });
+    }
     try {
       const { userId } = req.params;
 
@@ -87,18 +109,23 @@ router.get(
       console.error("Error retrieving pets:", error);
       return res.status(500).json({ error: "Failed to retrieve pets" });
     }
-  },
+  }
 );
 
 // CREATE: Add a new appointment
-router.post("/business/appointments", async (req, res) => {
+router.post("/business/appointments", isAuthenticated, async (req, res) => {
+  if (req.user?.owner !== true) {
+    return res.status(403).json({
+      error: "Business access required",
+    });
+  }
   try {
     const { user_id, pet_id, service_id, startTime, notes } = req.body;
 
     // Validate input data
     if (
       ![user_id, pet_id, service_id].every(
-        (id) => typeof id === "string" && /^[0-9a-fA-F]{24}$/.test(id),
+        (id) => typeof id === "string" && /^[0-9a-fA-F]{24}$/.test(id)
       ) ||
       typeof startTime !== "string" ||
       !Number.isFinite(Date.parse(startTime)) ||
@@ -124,7 +151,12 @@ router.post("/business/appointments", async (req, res) => {
 });
 
 // UPDATE: Modify an existing appointment
-router.put("/business/appointments/:id", async (req, res) => {
+router.put("/business/appointments/:id", isAuthenticated, async (req, res) => {
+  if (req.user?.owner !== true) {
+    return res.status(403).json({
+      error: "Business access required",
+    });
+  }
   try {
     const { id } = req.params;
     const { user_id, pet_id, service_id, startTime, status, notes } = req.body;
@@ -137,7 +169,7 @@ router.put("/business/appointments/:id", async (req, res) => {
     // Validate input data
     if (
       ![user_id, pet_id, service_id].every(
-        (value) => typeof value === "string" && /^[0-9a-fA-F]{24}$/.test(value),
+        (value) => typeof value === "string" && /^[0-9a-fA-F]{24}$/.test(value)
       ) ||
       typeof startTime !== "string" ||
       !Number.isFinite(Date.parse(startTime)) ||
@@ -170,26 +202,35 @@ router.put("/business/appointments/:id", async (req, res) => {
 });
 
 // DELETE: Permanently remove an appointment
-router.delete("/business/appointments/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    // Validate appointment ID
-    if (!/^[0-9a-fA-F]{24}$/.test(id)) {
-      return res.status(400).json({ error: "Invalid appointment ID" });
+router.delete(
+  "/business/appointments/:id",
+  isAuthenticated,
+  async (req, res) => {
+    if (req.user?.owner !== true) {
+      return res.status(403).json({
+        error: "Business access required",
+      });
     }
+    try {
+      const { id } = req.params;
 
-    const deleted = await deleteAppointment(id);
+      // Validate appointment ID
+      if (!/^[0-9a-fA-F]{24}$/.test(id)) {
+        return res.status(400).json({ error: "Invalid appointment ID" });
+      }
 
-    if (!deleted) {
-      return res.status(404).json({ error: "Appointment not found" });
+      const deleted = await deleteAppointment(id);
+
+      if (!deleted) {
+        return res.status(404).json({ error: "Appointment not found" });
+      }
+
+      return res.json({ message: "Appointment deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting appointment:", error);
+      return res.status(500).json({ error: "Failed to delete appointment" });
     }
-
-    return res.json({ message: "Appointment deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting appointment:", error);
-    return res.status(500).json({ error: "Failed to delete appointment" });
   }
-});
+);
 
 export default router;

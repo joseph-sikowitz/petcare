@@ -9,7 +9,10 @@ import "./App.css";
 
 
 function App({ children }) {
+  
   const [user, setUser] = useState(null);
+  // Ken: This line will work for me, can you see if you change to this will work for you also?
+  //const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     const fetchUser = async () => {

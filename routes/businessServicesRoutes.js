@@ -12,6 +12,7 @@ import {
   updateService,
   deleteService,
 } from "../database/businessServicesModel.js";
+import { isAuthenticated } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -27,7 +28,12 @@ router.get("/business/services", async (req, res) => {
 });
 
 // CREATE: Add a new service
-router.post("/business/services", async (req, res) => {
+router.post("/business/services", isAuthenticated, async (req, res) => {
+  if (req.user?.owner !== true) {
+    return res.status(403).json({
+      error: "Business access required",
+    });
+  }
   try {
     const { name, description, price, durationMinutes, isActive } = req.body;
     // Validate input data
@@ -66,7 +72,12 @@ router.post("/business/services", async (req, res) => {
 });
 
 // UPDATE: Modify an existing service
-router.put("/business/services/:id", async (req, res) => {
+router.put("/business/services/:id", isAuthenticated, async (req, res) => {
+  if (req.user?.owner !== true) {
+    return res.status(403).json({
+      error: "Business access required",
+    });
+  }
   try {
     const { id } = req.params;
     const { name, description, price, durationMinutes, isActive } = req.body;
@@ -112,7 +123,12 @@ router.put("/business/services/:id", async (req, res) => {
 });
 
 // DELETE: Remove an existing service
-router.delete("/business/services/:id", async (req, res) => {
+router.delete("/business/services/:id", isAuthenticated, async (req, res) => {
+  if (req.user?.owner !== true) {
+    return res.status(403).json({
+      error: "Business access required",
+    });
+  }
   try {
     const { id } = req.params;
     // Validate the service ID

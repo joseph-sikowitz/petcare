@@ -6,6 +6,8 @@
 */
 
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router";
+import { useUser } from "../context/UserContext.jsx";
 import BusinessServiceForm from "../components/BusinessServiceForm.jsx";
 import BusinessServiceTable from "../components/BusinessServiceTable.jsx";
 import "./BusinessServices.css";
@@ -20,6 +22,7 @@ const emptyForm = {
 };
 
 function BusinessServices() {
+  const user = useUser();
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -184,6 +187,18 @@ function BusinessServices() {
     } finally {
       setDeletingId(null);
     }
+  }
+
+  if (user === undefined) {
+    return <p>Checking authentication...</p>;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (user.owner !== true) {
+    return <Navigate to="/" replace />;
   }
 
   if (loading) {

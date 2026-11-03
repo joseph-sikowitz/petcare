@@ -6,6 +6,8 @@
 */
 
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router";
+import { useUser } from "../context/UserContext.jsx";
 import BusinessAppointmentForm from "../components/BusinessAppointmentForm.jsx";
 import BusinessAppointmentTable from "../components/BusinessAppointmentTable.jsx";
 import "./BusinessAppointments.css";
@@ -44,6 +46,7 @@ const emptyForm = {
 };
 
 function BusinessAppointments() {
+  const user = useUser();
   const [appointments, setAppointments] = useState([]);
   const [services, setServices] = useState([]);
   const [selectedDate, setSelectedDate] = useState(getToday());
@@ -354,6 +357,18 @@ function BusinessAppointments() {
     } finally {
       setDeletingId(null);
     }
+  }
+
+  if (user === undefined) {
+    return <p>Checking authentication...</p>;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (user.owner !== true) {
+    return <Navigate to="/" replace />;
   }
 
   if (loading) {
