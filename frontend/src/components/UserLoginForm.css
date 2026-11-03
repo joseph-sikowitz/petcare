@@ -42,3 +42,25 @@
   background-color: #ff0000;
   border: 1px solid #ff0000;
 }
+
+.userlogin-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.userlogin-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.userlogin-btn-primary {
+  background-color: #367fa6;
+  color: white;
+}
