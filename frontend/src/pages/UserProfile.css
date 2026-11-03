@@ -1,0 +1,12 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+
+  UserProfile styling
+*/
+
+div.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
