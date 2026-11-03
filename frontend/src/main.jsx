@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import UserLogin from "./pages/UserLogin.jsx";
 import UserRegister from "./pages/UserRegister.jsx";
+import UserProfile from "./pages/UserProfile.jsx";
 import BusinessDashboard from "./pages/BusinessDashboard.jsx";
 import BusinessServices from "./pages/BusinessServices.jsx";
 import BusinessAppointments from "./pages/BusinessAppointments.jsx";
@@ -21,6 +22,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<UserLogin />} />
           <Route path="/register" element={<UserRegister />} />
+          <Route path="/profile" element={UserProfile} />
           <Route path="/services" element={<BusinessServiceViewOnly />} />
           <Route path="/business/dashboard" element={<BusinessDashboard />} />
           <Route path="/business" element={<BusinessDashboard />} />

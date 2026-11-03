@@ -22,9 +22,9 @@ function Navbar() {
           <Link to="/services">Services</Link>
           {user ? (
             <>
-              {/*<Link to="/profile">Profile ({user.firstName} {user.lastName})</Link>*/}
-              <div> Welcome, {user.firstName} {user.lastName}!</div>
+              {<Link to="/profile">Profile</Link>}
               <a href="/api/auth/logout">Logout</a>
+              <div> Welcome, {user.firstName} {user.lastName}!</div>
             </>) : (
               <Link to="/login" className="navbar-login">Log In</Link>
             )}
