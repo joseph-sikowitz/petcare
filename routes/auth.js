@@ -87,7 +87,7 @@ router.post("/register", async (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/dashboard",
+    successRedirect: "/user/dashboard",
     failureRedirect: "/login?msg='Invalid credentials'",
   })
 );
