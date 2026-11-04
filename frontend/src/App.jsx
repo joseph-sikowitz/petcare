@@ -3,10 +3,9 @@ import Footer from "./components/Footer.jsx";
 
 import { useState, useEffect } from "react";
 
-import { UserContext } from "./context/UserContext.jsx";
+import { UserContext, SetUserContext } from "./context/UserContext.jsx";
 
 import "./App.css";
-
 
 function App({ children }) {
   const [user, setUser] = useState(undefined);
@@ -25,19 +24,21 @@ function App({ children }) {
         console.error("Failed to fetch user: ", error);
         setUser(null);
       }
-    }
+    };
     fetchUser();
   }, []);
 
   return (
     <UserContext.Provider value={user}>
-    <div className="app-layout">
-      <Navbar />
+      <SetUserContext.Provider value={setUser}>
+        <div className="app-layout">
+          <Navbar />
 
-      <main className="app-main">{children}</main>
+          <main className="app-main">{children}</main>
 
-      <Footer />
-    </div>
+          <Footer />
+        </div>
+      </SetUserContext.Provider>
     </UserContext.Provider>
   );
 }
