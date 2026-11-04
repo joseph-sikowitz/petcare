@@ -1,0 +1,38 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+*/
+
+.profile-card {
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.profile-btn-group {
+  padding: 10px 24px;
+}
+
+.profile-btn {
+  padding: 10px 16px;
+  margin-right: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.profile-btn-primary {
+  background-color: #367fa6;
+  color: white;
+}
+
+.profile-btn:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+  transform: translateY(-1px);
+}
