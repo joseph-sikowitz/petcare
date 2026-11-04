@@ -84,17 +84,8 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Ken: This block can be removed if yo accepted the suggested code below.
+// After login, based on user type to go to different landing page.
 router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login?msg='Invalid credentials'",
-  })
-);
-
-// Ken: For Joe to review. This will check if the user is owner, then redirect to owner landing page. /business/dashboard
-/* router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login?msg='Invalid credentials'",
@@ -103,10 +94,9 @@ router.post(
     if (req.user.owner === true) {
       return res.redirect("/business/dashboard");
     }
-    // Ken: Redirect regular customers to client landing page. 
     return res.redirect("/");
   }
-); */
+);
 
 // Get current user (protected route)
 router.get("/user", isAuthenticated, (req, res) => {
