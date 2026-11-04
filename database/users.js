@@ -11,7 +11,7 @@ dotenv.config({ quiet: true });
 
 const connection = db();
 const collection = await connection.getCollection(
-  process.env.MONGODB_COLLECTION_USERS
+  process.env.MONGODB_COLLECTION_USERS,
 );
 
 // Get a count of total user documents in database
@@ -100,7 +100,6 @@ export async function putUser(id, body) {
     firstName = null,
     lastName = null,
     username = null,
-    password = null,
     businessName = null,
     addressLine1 = null,
     addressLine2 = null,
@@ -119,7 +118,6 @@ export async function putUser(id, body) {
         firstName,
         lastName,
         username,
-        password,
         businessName,
         addressLine1,
         addressLine2,
