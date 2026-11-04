@@ -14,12 +14,7 @@ const db = database();
   READ: Retrieve appointments for a selected date and optional status
   including customer, pet and service details.
 */
-export async function getAppointmentsByDate(
-  date,
-  status,
-  startTime,
-  endTime,
-) {
+export async function getAppointmentsByDate(date, status, startTime, endTime) {
   const collection = await db.getCollection("appointments");
 
   const startOfDay = startTime
@@ -178,7 +173,7 @@ export async function updateAppointment(id, appointment) {
 
   const result = await collection.updateOne(
     { _id: new ObjectId(id) },
-    { $set: updates },
+    { $set: updates }
   );
 
   return result.matchedCount > 0;
