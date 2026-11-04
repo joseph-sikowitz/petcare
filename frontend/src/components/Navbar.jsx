@@ -20,12 +20,15 @@ function Navbar() {
         </Link>
 
         <div className="navbar-links">
-          <Link to={isOwner ? "/business/dashboard" : "/"}>Home</Link>
+          <Link to={isOwner ? "/business/dashboard" : "/user/dashboard"}>Home</Link>
           <Link to={isOwner ? "/business/services" : "/services"}>
             Services
           </Link>
           {isOwner && (
             <Link to="/business/appointments">Appointments</Link>
+          )}
+          {isOwner && (
+            <Link to="/user/dashboard">User Dashboard</Link>
           )}
 
           {user ? (
