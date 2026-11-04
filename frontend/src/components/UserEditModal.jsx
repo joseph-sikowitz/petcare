@@ -21,13 +21,12 @@ export default function UserEditModal({ title, message, onCancel }) {
     zipCode: user.zipCode || "",
     phoneNumber: user.phoneNumber || "",
     email: user.email || "",
-    owner: user.owner || false,
+    owner: Boolean(user.owner),
   });
-  const [isOwner, setIsOwner] = useState(Boolean(user.owner));
 
   function handleChange(event) {
-    const { name, value } = event.target;
-    setFormData((previous) => ({ ...previous, [name]: value}));
+    const { name, value, type, checked } = event.target;
+    setFormData((previous) => ({ ...previous, [name]: type === "checkbox" ? checked : value}));
   }
 
   async function handleSubmit(event) {
@@ -200,8 +199,8 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="owner"
               name="owner"
               type="checkbox"
-              checked={isOwner}
-              onChange={(event) => setIsOwner(event.target.checked)}
+              checked={formData.owner}
+              onChange={handleChange}
             />
             </div>
         </div>
