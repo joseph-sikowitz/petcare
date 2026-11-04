@@ -28,7 +28,7 @@ export async function updateService(id, service) {
   const collection = await db.getCollection("services");
   const result = await collection.updateOne(
     { _id: new ObjectId(id) },
-    { $set: service },
+    { $set: service }
   );
   return result.matchedCount > 0;
 }

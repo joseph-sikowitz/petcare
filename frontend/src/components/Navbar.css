@@ -29,10 +29,12 @@
   font-size: 28px;
 }
 
-.navbar-links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
+.navbar-links a,
+.navbar-links .navbar-welcome {
+  color: var(--color-primary-dark, #23546f);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 .navbar-links a {
@@ -58,6 +60,19 @@
   color: #ffffff;
 }
 
+.navbar-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 28px;
+}
+
+.navbar-links > a,
+.navbar-links > .navbar-welcome {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
 @media (max-width: 600px) {
   .navbar {
     flex-direction: column;
@@ -70,3 +85,4 @@
     gap: 16px;
   }
 }
+

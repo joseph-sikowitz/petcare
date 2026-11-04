@@ -84,12 +84,18 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// After login, based on user type to go to different landing page.
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/user/dashboard",
     failureRedirect: "/login?msg='Invalid credentials'",
-  })
+  }),
+  (req, res) => {
+    if (req.user.owner === true) {
+      return res.redirect("/business/dashboard");
+    }
+    return res.redirect("/");
+  }
 );
 
 // Get current user (protected route)
