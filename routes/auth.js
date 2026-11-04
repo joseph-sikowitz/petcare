@@ -84,6 +84,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// Ken: This block can be removed if yo accepted the suggested code below.
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -91,6 +92,21 @@ router.post(
     failureRedirect: "/login?msg='Invalid credentials'",
   })
 );
+
+// Ken: For Joe to review. This will check if the user is owner, then redirect to owner landing page. /business/dashboard
+/* router.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/login?msg='Invalid credentials'",
+  }),
+  (req, res) => {
+    if (req.user.owner === true) {
+      return res.redirect("/business/dashboard");
+    }
+    // Ken: Redirect regular customers to client landing page. 
+    return res.redirect("/");
+  }
+); */
 
 // Get current user (protected route)
 router.get("/user", isAuthenticated, (req, res) => {
