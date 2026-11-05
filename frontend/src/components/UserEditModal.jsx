@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 import { useUser, useSetUser } from "../context/UserContext.jsx";
 import "./UserEditModal.css";
@@ -82,7 +83,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="firstName"
               name="firstName"
               type="text"
-              defaultValue={formData.firstName}
+              value={formData.firstName}
               onChange={handleChange}
               required
             />
@@ -94,7 +95,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="lastName"
               name="lastName"
               type="text"
-              defaultValue={formData.lastName}
+              value={formData.lastName}
               onChange={handleChange}
               required
             />
@@ -106,7 +107,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="businessName"
               name="businessName"
               type="text"
-              defaultValue={formData.businessName}
+              value={formData.businessName}
               onChange={handleChange}
             />
             </div>
@@ -117,7 +118,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="addressLine1"
               name="addressLine1"
               type="text"
-              defaultValue={formData.addressLine1}
+              value={formData.addressLine1}
               onChange={handleChange}
             />
             </div>
@@ -128,7 +129,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="addressLine2"
               name="addressLine2"
               type="text"
-              defaultValue={formData.addressLine2}
+              value={formData.addressLine2}
               onChange={handleChange}
             />
             </div>
@@ -139,7 +140,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="city"
               name="city"
               type="text"
-              defaultValue={formData.city}
+              value={formData.city}
               onChange={handleChange}
             />
             </div>
@@ -150,7 +151,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="state"
               name="state"
               type="text"
-              defaultValue={formData.state}
+              value={formData.state}
               onChange={handleChange}
             />
             </div>
@@ -165,7 +166,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               pattern="[0-9]{5}"
               maxLength={5}
               autoComplete="postal-code"
-              defaultValue={formData.zipCode}
+              value={formData.zipCode}
               onChange={handleChange}
             />
             </div>
@@ -177,7 +178,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               name="phoneNumber"
               type="tel"
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              defaultValue={formData.phoneNumber}
+              value={formData.phoneNumber}
               onChange={handleChange}
             />
             </div>
@@ -188,7 +189,7 @@ export default function UserEditModal({ title, message, onCancel }) {
               id="email"
               name="email"
               type="text"
-              defaultValue={formData.email}
+              value={formData.email}
               onChange={handleChange}
             />
             </div>
@@ -213,3 +214,9 @@ export default function UserEditModal({ title, message, onCancel }) {
     </div>
   );
 }
+
+UserEditModal.propTypes = {
+  title: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
