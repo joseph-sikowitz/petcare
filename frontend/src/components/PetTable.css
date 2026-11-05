@@ -6,8 +6,9 @@
 */
 
 .pets-table-card {
-    padding: 16px;
-  }
+  padding: 16px;
+  margin-top: 30px;
+}
 
 .pets-table-heading {
   display: flex;
@@ -53,4 +54,28 @@
 
 .pets-table tbody tr:hover {
   background-color: #fff6ef;
+}
+
+.pets-btn {
+  padding: 10px 16px;
+  margin-right: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pets-btn-primary {
+  background-color: #367fa6;
+  color: white;
+}
+
+.pets-btn:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+  transform: translateY(-1px);
 }
