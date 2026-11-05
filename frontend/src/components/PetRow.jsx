@@ -36,7 +36,7 @@ export default function PetRow({ pet, onEdit, onDelete }) {
             </button>
 
             <button
-              className="pets-btn pets-btn-edit"
+              className="pets-btn pets-btn-delete"
               type="button"
               onClick={() => onDelete()}
             >
