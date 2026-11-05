@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 
 import { useUser } from "../context/UserContext.jsx";
 import PetRow from "./PetRow.jsx";
+import PetAddModal from "./PetAddModal.jsx";
 
 import "./PetTable.css";
 
@@ -17,6 +18,7 @@ const PETS_API_URL = "/api/pets";
 export default function PetTable() {
   const user = useUser();
   const [pets, setPets] = useState(undefined);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     if (!user?._id) return;
@@ -38,7 +40,26 @@ export default function PetTable() {
   }, [user?._id]);
 
   const onEdit = () => {}
-  const onDelete = () => {}
+
+  async function onDelete (petId) {
+    if (
+      !window.confirm(
+        "Are you sure you want to permanently delete this pet?",
+      )
+    ) {
+      return;
+    }
+    try {
+      const res = await fetch(`${PETS_API_URL}/${petId}`, { method: "DELETE" });
+      if (!res.ok) {
+        throw new Error("Could not delete pet.");
+      }
+      setPets(prevPets => prevPets.filter(p => p._id !== petId));
+    } catch (error) {
+      console.error(error);
+      //TODO: error handling component here
+    }
+  }
 
   if (pets === undefined) return <p>Loading pets...</p>;
   if (pets === null) return <p>Could not load pets.</p>;
@@ -47,6 +68,23 @@ export default function PetTable() {
     <div className="pets-table-card">
       <div className="pets-table-heading">
         <h2>Pets</h2>
+        <span>
+          <button
+            className="pets-btn pets-btn-primary"
+            type="button"
+            onClick={() => setShowAddModal(true)}
+          >
+            + Add Pet
+          </button>
+          {showAddModal && (
+                      <PetAddModal
+                        title="Add pet"
+                        message="Add a new pet here."
+                        onCancel={() => setShowAddModal(false)}
+                        setPets={setPets}
+                      />
+          )}
+        </span>
       </div>
 
       <div className="pets-table-wrapper">

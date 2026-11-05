@@ -11,6 +11,7 @@ import "./PetRow.css";
 
 export default function PetRow({ pet, onEdit, onDelete }) {
   const {
+    _id = null,
     name = null,
     species = null,
     breed = null,
@@ -19,7 +20,7 @@ export default function PetRow({ pet, onEdit, onDelete }) {
   } = pet;
 
   return (
-    <tr>
+    <tr className="petcare-card">
         <td>{name || "None"}</td>
         <td>{species || "None"}</td>
         <td>{breed || "None"}</td>
@@ -30,7 +31,7 @@ export default function PetRow({ pet, onEdit, onDelete }) {
             <button
               className="pets-btn pets-btn-edit"
               type="button"
-              onClick={() => onEdit()}
+              onClick={() => onEdit(_id)}
             >
               Edit
             </button>
@@ -38,7 +39,7 @@ export default function PetRow({ pet, onEdit, onDelete }) {
             <button
               className="pets-btn pets-btn-delete"
               type="button"
-              onClick={() => onDelete()}
+              onClick={() => onDelete(_id)}
             >
               Delete
             </button>
