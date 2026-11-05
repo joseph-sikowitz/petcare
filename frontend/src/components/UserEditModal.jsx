@@ -1,3 +1,10 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+
+  User edit modal
+*/
+
 import { useState } from "react";
 import PropTypes from "prop-types";
 
