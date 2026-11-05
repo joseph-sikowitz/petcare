@@ -63,19 +63,20 @@ export async function postPet(newPet) {
     user_id = null,
   } = newPet;
 
-  let isoDate = birthdate;
-  if (isoDate != null) {
-    isoDate = new Date(isoDate);
-  }
+  const isoDate = birthdate ? new Date(birthdate) : new Date();
 
-  return await collection.insertOne({
+  const petToAdd = {
     name: name,
     species: species,
     breed: breed,
     medicines: medicines,
     birthdate: isoDate,
     user_id: new ObjectId(user_id),
-  });
+  };
+
+  const res = await collection.insertOne(petToAdd);
+
+  return { ...petToAdd, _id: res.insertedId };
 }
 
 // Update existing pet by ID
