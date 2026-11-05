@@ -3,21 +3,23 @@ import { useUser } from "../context/UserContext.jsx";
 import "./Navbar.css";
 
 function Navbar() {
-  const location = useLocation();
   const user = useUser();
+  const location = useLocation();
 
   const isOwner = user?.owner === true;
-
+  const isProfilePage = location.pathname === "/user/dashboard";
   const isBusinessDashboard =
     location.pathname === "/business/dashboard" ||
     location.pathname === "/business";
 
-  const logoPath = isOwner ? "/business/dashboard" : "/user/dashboard";
+  const dashboardPath = isOwner
+    ? "/business/dashboard"
+    : "/user/dashboard";
 
   return (
     <header className="site-header">
       <nav className="navbar" aria-label="Main navigation">
-        <Link className="navbar-brand" to={logoPath}>
+        <Link className="navbar-brand" to={dashboardPath}>
           <span className="navbar-logo" aria-hidden="true">
             🐾
           </span>
@@ -25,13 +27,15 @@ function Navbar() {
         </Link>
 
         <div className="navbar-links">
-          <Link to="/user/dashboard">Home</Link>
+          {(!isOwner || !isBusinessDashboard) && (
+            <Link to={dashboardPath}>Dashboard</Link>
+          )}
+
+          {isOwner && !isProfilePage && (
+            <Link to="/user/dashboard">Profile</Link>
+          )}
 
           {!isOwner && <Link to="/services">Services</Link>}
-
-          {isOwner && !isBusinessDashboard && (
-            <Link to="/business/dashboard">Dashboard</Link>
-          )}
 
           {user ? (
             <>
