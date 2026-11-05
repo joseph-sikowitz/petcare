@@ -112,7 +112,6 @@ export async function putPet(id, body) {
         breed,
         medicines,
         birthdate: isoDate,
-        userId,
       },
     }
   );
