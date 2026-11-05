@@ -94,7 +94,7 @@ router.post(
     if (req.user.owner === true) {
       return res.redirect("/business/dashboard");
     }
-    return res.redirect("/");
+    return res.redirect("/user/dashboard");
   }
 );
 
