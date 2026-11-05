@@ -1,18 +1,23 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useUser } from "../context/UserContext.jsx";
 import "./Navbar.css";
 
 function Navbar() {
+  const location = useLocation();
   const user = useUser();
+
   const isOwner = user?.owner === true;
+
+  const isBusinessDashboard =
+    location.pathname === "/business/dashboard" ||
+    location.pathname === "/business";
+
+  const logoPath = isOwner ? "/business/dashboard" : "/user/dashboard";
 
   return (
     <header className="site-header">
       <nav className="navbar" aria-label="Main navigation">
-        <Link
-          className="navbar-brand"
-          to={isOwner ? "/business/dashboard" : "/"}
-        >
+        <Link className="navbar-brand" to={logoPath}>
           <span className="navbar-logo" aria-hidden="true">
             🐾
           </span>
@@ -20,24 +25,25 @@ function Navbar() {
         </Link>
 
         <div className="navbar-links">
-          <Link to={isOwner ? "/business/dashboard" : "/user/dashboard"}>Home</Link>
-          <Link to={isOwner ? "/business/services" : "/services"}>
-            Services
-          </Link>
-          {isOwner && (
-            <Link to="/business/appointments">Appointments</Link>
-          )}
-          {isOwner && (
-            <Link to="/user/dashboard">User Dashboard</Link>
+          <Link to="/user/dashboard">Home</Link>
+
+          {!isOwner && <Link to="/services">Services</Link>}
+
+          {isOwner && !isBusinessDashboard && (
+            <Link to="/business/dashboard">Dashboard</Link>
           )}
 
           {user ? (
             <>
-              <div className="navbar-welcome">Welcome, {user.firstName} {user.lastName}!</div>
+              <div className="navbar-welcome">
+                Welcome, {user.firstName} {user.lastName}!
+              </div>
               <a href="/api/auth/logout">Logout</a>
             </>
           ) : (
-            <Link to="/login" className="navbar-login">Log In</Link>
+            <Link to="/login" className="navbar-login">
+              Log In
+            </Link>
           )}
         </div>
       </nav>
