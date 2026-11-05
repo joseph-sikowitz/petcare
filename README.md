@@ -202,6 +202,7 @@ cd ..
 Create the environment file(s) required by the backend. Do not commit secrets or credentials to Git.
 
 ```text
+MONGODB_URI="your-database-here"
 MONGODB_COLLECTION_USERS="users"
 MONGODB_COLLECTION_PETS="pets"
 MONGODB_COLLECTION_APPOINTMENTS="appointments"
