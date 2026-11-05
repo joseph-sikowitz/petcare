@@ -26,7 +26,7 @@ export async function getPetById(id) {
 
 // Helper function for parsing URL query parameters
 function buildQuery(query) {
-  const { name, species, breed } = query;
+  const { name, species, breed, user_id } = query;
 
   const mongoQuery = {};
 
@@ -38,6 +38,9 @@ function buildQuery(query) {
   }
   if (breed && typeof breed === "string" && breed.trim()) {
     mongoQuery.breed = { $regex: breed, $options: "i" };
+  }
+  if (user_id && typeof user_id === "string") {
+    mongoQuery.user_id = new ObjectId(user_id);
   }
 
   return mongoQuery;
