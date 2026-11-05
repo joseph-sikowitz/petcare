@@ -90,17 +90,11 @@ export async function putPet(id, body) {
     breed = null,
     medicines = [],
     birthdate = null,
-    user_id = null,
   } = body;
 
   let isoDate = birthdate;
   if (isoDate != null) {
     isoDate = new Date(isoDate);
-  }
-
-  let userId = user_id;
-  if (user_id != null) {
-    userId = new ObjectId(userId);
   }
 
   return await collection.updateOne(
