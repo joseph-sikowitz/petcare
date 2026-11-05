@@ -1,0 +1,27 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+*/
+
+.pets-btn-edit {
+  background-color: #e7f3fa;
+  color: #23546f;
+}
+
+.pets-btn-edit:hover:not(:disabled) {
+  background-color: #d1e6f2;
+}
+
+.pets-btn-delete {
+  background-color: #fce5dc;
+  color: #a33b24;
+}
+
+.pets-btn-delete:hover:not(:disabled) {
+  background-color: #f5cbbb;
+}
+
+.pets-row-actions {
+  display: flex;
+  gap: 8px;
+}

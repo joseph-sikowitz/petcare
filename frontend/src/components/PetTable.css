@@ -1,0 +1,56 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+
+  PetTable CSS
+*/
+
+.pets-table-card {
+    padding: 16px;
+  }
+
+.pets-table-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.pets-table-heading h2 {
+  margin: 0;
+}
+
+.pets-table-heading span {
+  color: #666;
+  font-size: 14px;
+}
+
+.pets-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.pets-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.pets-table th {
+  background-color: #e7f3fa;
+  color: #23546f;
+  padding: 14px 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pets-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.pets-table tbody tr:hover {
+  background-color: #fff6ef;
+}

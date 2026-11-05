@@ -10,6 +10,7 @@ import "./UserDashboard.css";
 import { useUser } from "../context/UserContext.jsx";
 
 import UserProfileData from "../components/UserProfileData.jsx";
+import PetTable from "../components/PetTable.jsx";
 
 function UserProfile() {
   const user = useUser();
@@ -19,6 +20,7 @@ function UserProfile() {
       <div className="dashboard-page">
         <h1>User Dashboard</h1>
         {user ? (<UserProfileData />) : (<p>Not logged in</p>)}
+        {user ? (<PetTable />) : (<p>No pet data</p>)}
       </div>
     </main>
   );
