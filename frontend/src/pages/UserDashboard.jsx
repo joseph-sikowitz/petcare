@@ -20,7 +20,7 @@ function UserProfile() {
       <div className="dashboard-page">
         <h1>User Dashboard</h1>
         {user ? (<UserProfileData />) : (<p>Not logged in</p>)}
-        {user ? (<PetTable />) : (<p>No pet data</p>)}
+        {user ? (<PetTable />) : null}
       </div>
     </main>
   );

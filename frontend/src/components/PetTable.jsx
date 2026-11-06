@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { useUser } from "../context/UserContext.jsx";
 import PetRow from "./PetRow.jsx";
 import PetAddModal from "./PetAddModal.jsx";
+import PetSearch from "./PetSearch.jsx";
 
 import "./PetTable.css";
 
@@ -17,7 +18,8 @@ const PETS_API_URL = "/api/pets";
 
 export default function PetTable() {
   const user = useUser();
-  const [pets, setPets] = useState(undefined);
+  const [pets, setPets] = useState([]);
+  const [petSearch, setPetSearch] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
@@ -36,14 +38,18 @@ export default function PetTable() {
       }
     };
     fetchPets();
-    return () => { ignore = true; }
+    return () => {
+      ignore = true;
+    };
   }, [user?._id]);
 
-  async function onDelete (petId) {
+  const visiblePets = pets.filter((p) =>
+    p.name.toLowerCase().includes(petSearch.toLowerCase())
+  );
+
+  async function onDelete(petId) {
     if (
-      !window.confirm(
-        "Are you sure you want to permanently delete this pet?",
-      )
+      !window.confirm("Are you sure you want to permanently delete this pet?")
     ) {
       return;
     }
@@ -52,7 +58,7 @@ export default function PetTable() {
       if (!res.ok) {
         throw new Error("Could not delete pet.");
       }
-      setPets(prevPets => prevPets.filter(p => p._id !== petId));
+      setPets((prevPets) => prevPets.filter((p) => p._id !== petId));
     } catch (error) {
       console.error(error);
       //TODO: error handling component here
@@ -64,8 +70,9 @@ export default function PetTable() {
 
   return (
     <div className="pets-table-card">
+      <h2>Pets</h2>
       <div className="pets-table-heading">
-        <h2>Pets</h2>
+        <PetSearch petSearch={petSearch} setPetSearch={setPetSearch} />
         <span>
           <button
             className="pets-btn pets-btn-primary"
@@ -75,12 +82,12 @@ export default function PetTable() {
             + Add Pet
           </button>
           {showAddModal && (
-                      <PetAddModal
-                        title="Add pet"
-                        message="Add a new pet here."
-                        onCancel={() => setShowAddModal(false)}
-                        setPets={setPets}
-                      />
+            <PetAddModal
+              title="Add pet"
+              message="Add a new pet here."
+              onCancel={() => setShowAddModal(false)}
+              setPets={setPets}
+            />
           )}
         </span>
       </div>
@@ -100,17 +107,21 @@ export default function PetTable() {
 
           <tbody>
             {pets.length === 0 ? (
-                <tr>
-                  <td colSpan="6" className="pets-empty">
-                    No pets found for your account.
-                  </td>  
-                </tr>
-              ) : (
-                pets.map((pet) => (
-                     <PetRow key={pet._id} pet={pet} onDelete={onDelete} setPets={setPets}/>
-                ))
-              )
-            }
+              <tr>
+                <td colSpan="6" className="pets-empty">
+                  No pets found for your account.
+                </td>
+              </tr>
+            ) : (
+              visiblePets.map((pet) => (
+                <PetRow
+                  key={pet._id}
+                  pet={pet}
+                  onDelete={onDelete}
+                  setPets={setPets}
+                />
+              ))
+            )}
           </tbody>
         </table>
       </div>
