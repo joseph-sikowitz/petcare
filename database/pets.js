@@ -63,7 +63,9 @@ export async function postPet(newPet) {
     user_id = null,
   } = newPet;
 
-  const isoDate = birthdate ? new Date(birthdate) : new Date();
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const isoDate = birthdate ? new Date(birthdate) : today;
 
   const petToAdd = {
     name: name,
