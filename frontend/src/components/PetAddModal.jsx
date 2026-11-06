@@ -45,6 +45,10 @@ export default function PetAddModal({ title, message, onCancel, setPets }) {
           .filter(Boolean),
       }
 
+      if (payload.birthdate === "Invalid Date") {
+        payload.birthdate = new Date();
+      }
+
       const res = await fetch(`${PETS_API_URL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json"},
@@ -57,11 +61,11 @@ export default function PetAddModal({ title, message, onCancel, setPets }) {
       const result = await res.json();
       setPets((prev) => [...prev, {
         _id: result.insertedId,
-        name: payload.name,
-        species: payload.species,
-        breed: payload.breed,
-        medicines: payload.medicines,
-        birthdate: payload.birthdate}]);
+        name: result.name,
+        species: result.species,
+        breed: result.breed,
+        medicines: result.medicines,
+        birthdate: result.birthdate}]);
       onCancel();
     } catch (error) {
         console.error(error.message);

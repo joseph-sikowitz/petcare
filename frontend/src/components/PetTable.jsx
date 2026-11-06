@@ -39,8 +39,6 @@ export default function PetTable() {
     return () => { ignore = true; }
   }, [user?._id]);
 
-  const onEdit = () => {}
-
   async function onDelete (petId) {
     if (
       !window.confirm(
@@ -109,7 +107,7 @@ export default function PetTable() {
                 </tr>
               ) : (
                 pets.map((pet) => (
-                     <PetRow key={pet._id} pet={pet} onEdit={onEdit} onDelete={onDelete} />
+                     <PetRow key={pet._id} pet={pet} onDelete={onDelete} setPets={setPets}/>
                 ))
               )
             }

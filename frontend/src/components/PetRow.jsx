@@ -6,10 +6,14 @@
 */
 
 import PropTypes from "prop-types";
+import { useState } from "react";
 
+import PetEditModal from "./PetEditModal.jsx";
 import "./PetRow.css";
 
-export default function PetRow({ pet, onEdit, onDelete }) {
+export default function PetRow({ pet, onDelete, setPets }) {
+  const [showEditModal, setShowEditModal] = useState(false);
+
   const {
     _id = null,
     name = null,
@@ -31,10 +35,19 @@ export default function PetRow({ pet, onEdit, onDelete }) {
             <button
               className="pets-btn pets-btn-edit"
               type="button"
-              onClick={() => onEdit(_id)}
+              onClick={() => setShowEditModal(true)}
             >
               Edit
             </button>
+            {showEditModal && (
+                        <PetEditModal
+                          title="Edit pet"
+                          message="Make changes to your pet's profile here."
+                          onCancel={() => setShowEditModal(false)}
+                          pet={pet}
+                          setPets={setPets}
+                        />
+                      )}
 
             <button
               className="pets-btn pets-btn-delete"
