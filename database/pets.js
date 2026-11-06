@@ -11,7 +11,7 @@ dotenv.config({ quiet: true });
 
 const connection = db();
 const collection = await connection.getCollection(
-  process.env.MONGODB_COLLECTION_PETS
+  process.env.MONGODB_COLLECTION_PETS,
 );
 
 // Get a count of total pet documents in database
@@ -98,18 +98,22 @@ export async function putPet(id, body) {
     isoDate = new Date(isoDate);
   }
 
-  return await collection.updateOne(
+  const dataToAdd = {
+    name: name,
+    species: species,
+    breed: breed,
+    medicines: medicines,
+    birthdate: isoDate,
+  };
+
+  await collection.updateOne(
     { _id: new ObjectId(id) },
     {
-      $set: {
-        name,
-        species,
-        breed,
-        medicines,
-        birthdate: isoDate,
-      },
+      $set: { ...dataToAdd },
     }
   );
+
+  return { ...dataToAdd, _id: new ObjectId(id) };
 }
 
 // Delete pet by ID
