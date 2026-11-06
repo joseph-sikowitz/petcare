@@ -58,14 +58,8 @@ export default function PetAddModal({ title, message, onCancel, setPets }) {
       if (!res.ok) {
         throw new Error ("Could not create new pet.");
       }
-      const result = await res.json();
-      setPets((prev) => [...prev, {
-        _id: result.insertedId,
-        name: result.name,
-        species: result.species,
-        breed: result.breed,
-        medicines: result.medicines,
-        birthdate: result.birthdate}]);
+      const createdPet = await res.json();
+      setPets((prev) => [...prev, createdPet]);
       onCancel();
     } catch (error) {
         console.error(error.message);

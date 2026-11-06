@@ -18,7 +18,7 @@ export default function UserEditModal({ title, message, onCancel, pet, setPets }
     species: pet.species || "",
     breed: pet.breed || "",
     medicines: pet.medicines.join(", ") || "",
-    birthdate: new Date(pet.birthdate).toLocaleDateString() || "",
+    birthdate: new Date(pet.birthdate).toISOString().split("T")[0] || "",
   });
 
   function handleChange(event) {
@@ -36,6 +36,7 @@ export default function UserEditModal({ title, message, onCancel, pet, setPets }
           .split(",")
           .map((m) => m.trim())
           .filter(Boolean),
+        birthdate: formData.birthdate || null
       }
 
       if (payload.birthdate === "Invalid Date") {
@@ -53,8 +54,6 @@ export default function UserEditModal({ title, message, onCancel, pet, setPets }
       }
 
       const updatedPet = await res.json();
-
-      updatedPet.birthdate = new Date(updatedPet.birthdate).toLocaleDateString()
       
       setPets(prevPets => prevPets.map(p => p._id === pet._id ? { ...p, ...updatedPet } : p));
       onCancel();
@@ -128,7 +127,7 @@ export default function UserEditModal({ title, message, onCancel, pet, setPets }
             <input
               id="birthdate"
               name="birthdate"
-              type="text"
+              type="date"
               value={formData.birthdate}
               onChange={handleChange}
             />
