@@ -49,3 +49,9 @@
   color: #fff;
   transform: translateY(-1px);
 }
+
+.btn-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

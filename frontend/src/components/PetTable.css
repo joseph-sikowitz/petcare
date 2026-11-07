@@ -29,6 +29,9 @@
 
 .pets-table-wrapper {
   width: 100%;
+  max-width: 100%;
+  align-self: stretch;
+  display: grid;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -36,7 +39,8 @@
 .pets-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  text-align: center;
+  table-layout: auto;
 }
 
 .pets-table th {
@@ -45,12 +49,18 @@
   padding: 14px 12px;
   font-weight: 600;
   white-space: nowrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .pets-table td {
   padding: 14px 12px;
   border-bottom: 1px solid #eee;
   vertical-align: middle;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .pets-table tbody tr:hover {

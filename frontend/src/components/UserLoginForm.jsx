@@ -9,8 +9,6 @@ import { useSearchParams } from "react-router";
 
 import "./UserLoginForm.css";
 
-//TODO: style registration link
-
 export default function UserLoginForm() {
   const [msgParams] = useSearchParams();
   const msg = msgParams.get('msg');

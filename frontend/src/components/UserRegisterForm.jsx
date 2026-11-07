@@ -7,8 +7,6 @@
 
 import "./UserRegisterForm.css";
 
-//TODO: change CSS to be register specific
-
 export default function UserRegisterForm() {
   return (
     <div className="petcare-card userregister-form-card">

@@ -6,7 +6,6 @@
 */
 
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 
 import { useUser } from "../context/UserContext.jsx";
 import PetRow from "./PetRow.jsx";
@@ -129,5 +128,3 @@ export default function PetTable() {
     </div>
   );
 }
-
-PetTable.PropTypes = {}

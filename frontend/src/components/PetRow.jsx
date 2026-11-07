@@ -30,7 +30,7 @@ export default function PetRow({ pet, onDelete, setPets }) {
         <td>{breed || "None"}</td>
         <td>{medicines.length > 0 ? medicines.join(", ") : "None"}</td>
         <td>{birthdate ? new Date(birthdate).toLocaleDateString(undefined, { timeZone: "UTC" }) : "None"}</td>
-        <td>
+        <td className="btn-cell">
           <div className="pets-row-actions">
             <button
               className="pets-btn pets-btn-edit"
