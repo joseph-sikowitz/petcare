@@ -6,13 +6,13 @@
 */
 
 import { useState } from "react";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import "./PetEditModal.css";
 
 const PETS_API_URL = "/api/pets";
 
-export default function UserEditModal({ title, message, onCancel, pet, setPets }) {  
+export default function PetEditModal({ title, message, onCancel, pet, setPets }) {  
   const [formData, setFormData] = useState({
     name: pet.name || "",
     species: pet.species || "",
@@ -142,3 +142,21 @@ export default function UserEditModal({ title, message, onCancel, pet, setPets }
     </div>
   );
 }
+
+PetEditModal.PropTypes = {
+  title: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  pet: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      species: PropTypes.string.isRequired,
+      breed: PropTypes.string.isRequired,
+      medicines: PropTypes.arrayOf(
+        PropTypes.string
+      ),
+      birthdate: PropTypes.string,
+      user_id: PropTypes.string
+    }
+  ),
+  setPets: PropTypes.func.isRequired
+};

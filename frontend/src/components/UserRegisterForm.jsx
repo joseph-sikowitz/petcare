@@ -5,6 +5,8 @@
   User register form component
 */
 
+import PropTypes from "prop-types";
+
 import "./UserRegisterForm.css";
 
 //TODO: change CSS to be register specific
@@ -168,3 +170,5 @@ export default function UserRegisterForm() {
     </div>
   );
 }
+
+UserRegisterForm.PropTypes = {}

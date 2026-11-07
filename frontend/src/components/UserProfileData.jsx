@@ -5,7 +5,7 @@
   User profile data component
 */
 
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { useUser } from "../context/UserContext.jsx";
 import { useState } from "react";
 
@@ -13,7 +13,6 @@ import "./UserProfileData.css";
 import UserEditModal from "./UserEditModal.jsx";
 
 const USERS_API_URL = "/api/users";
-//const PETS_API_URL = "/api/pets";
 const LOGOUT_API_URL = "/api/auth/logout";
 
 export default function UserProfileData() {
@@ -83,3 +82,5 @@ export default function UserProfileData() {
     </div>
   );
 }
+
+UserProfileData.PropTypes = {}

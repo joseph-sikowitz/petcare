@@ -5,9 +5,9 @@
   User dashboard
 */
 
+import PropTypes from "prop-types";
+
 export default function PetSearch({ petSearch, setPetSearch }) {
-
-
   return (
     <input
       type="search"
@@ -17,4 +17,9 @@ export default function PetSearch({ petSearch, setPetSearch }) {
       aria-label="Search services"
     />
   );
+}
+
+PetSearch.PropTypes = {
+  petSearch: PropTypes.string.isRequired,
+  setPetSearch: PropTypes.func.isRequired
 }
