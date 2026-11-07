@@ -1,0 +1,21 @@
+/*
+  Author: Joseph Sikowitz
+  November 2026
+
+  Error message style
+*/
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.warning {
+  color: #ffffff;
+  background-color: #ff0000;
+  border: 1px solid #ff0000;
+}

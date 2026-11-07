@@ -7,6 +7,7 @@
 
 import { useSearchParams } from "react-router";
 
+import ErrorMessage from "./ErrorMessage.jsx"
 import "./UserLoginForm.css";
 
 export default function UserLoginForm() {
@@ -52,7 +53,7 @@ export default function UserLoginForm() {
         </div>
       </form>
       <p>No account? <a href="/register">Register here</a></p>
-      {msg ? (<div className="alert warning">{msg.replace(/'/g, '')}</div>) : (<div></div>)}
+      {msg ? (<ErrorMessage msg={msg} />) : null}
     </div>
   );
 }

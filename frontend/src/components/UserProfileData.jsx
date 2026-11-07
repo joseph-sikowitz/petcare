@@ -50,7 +50,6 @@ export default function UserProfileData() {
       window.location.href = LOGOUT_API_URL;
     } catch (error) {
       console.log(error.message);
-      //TODO: use error handling component here
     }
   } 
 
