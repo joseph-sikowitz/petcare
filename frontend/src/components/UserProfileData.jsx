@@ -5,7 +5,6 @@
   User profile data component
 */
 
-import PropTypes from "prop-types";
 import { useUser } from "../context/UserContext.jsx";
 import { useState } from "react";
 
@@ -83,4 +82,3 @@ export default function UserProfileData() {
   );
 }
 
-UserProfileData.PropTypes = {}

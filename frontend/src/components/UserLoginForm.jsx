@@ -6,7 +6,6 @@
 */
 
 import { useSearchParams } from "react-router";
-import PropTypes from "prop-types";
 
 import "./UserLoginForm.css";
 
@@ -59,5 +58,3 @@ export default function UserLoginForm() {
     </div>
   );
 }
-
-UserLoginForm.PropTypes = {}
