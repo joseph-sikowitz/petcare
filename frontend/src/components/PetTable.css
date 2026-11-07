@@ -30,6 +30,7 @@
 .pets-table-wrapper {
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pets-table {
@@ -79,4 +80,28 @@
   background: var(--color-primary-dark);
   color: #fff;
   transform: translateY(-1px);
+}
+
+@media screen and (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+    border-bottom: 1px solid #eee;
+  }
 }
