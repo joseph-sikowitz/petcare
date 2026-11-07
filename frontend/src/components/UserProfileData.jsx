@@ -12,6 +12,7 @@ import "./UserProfileData.css";
 import UserEditModal from "./UserEditModal.jsx";
 
 const USERS_API_URL = "/api/users";
+const PETS_API_URL = "/api/pets";
 const LOGOUT_API_URL = "/api/auth/logout";
 
 export default function UserProfileData() {
@@ -28,7 +29,19 @@ export default function UserProfileData() {
     }
 
     try {
-      const deleteResponse = await fetch(`${USERS_API_URL}/${user._id}`, { method: "DELETE" })
+      const petsResponse = await fetch (`${PETS_API_URL}?user_id=${user._id}`);
+      const petsArray = await petsResponse.json();
+
+      if (petsArray.length !== 0) {
+        petsArray.forEach(async (pet) => {
+          const res = await fetch(`${PETS_API_URL}/${pet._id}`, { method: "DELETE" });
+          if (!res.ok) {
+            throw new Error("Failed to delete pet associated with user");
+          }
+        });
+      }
+
+      const deleteResponse = await fetch(`${USERS_API_URL}/${user._id}`, { method: "DELETE" });
 
       if(!deleteResponse.ok) {
         throw new Error("Failed to delete user account");
