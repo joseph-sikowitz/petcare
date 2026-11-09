@@ -9,3 +9,7 @@ div.dashboard-page {
   display: flex;
   flex-direction: column;
 }
+
+div.dashboard-page > h1 {
+  text-align: center;
+}
