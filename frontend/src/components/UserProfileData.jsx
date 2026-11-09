@@ -10,6 +10,7 @@ import { useState } from "react";
 
 import "./UserProfileData.css";
 import UserEditModal from "./UserEditModal.jsx";
+import ErrorMessage from "./ErrorMessage.jsx";
 
 const USERS_API_URL = "/api/users";
 const PETS_API_URL = "/api/pets";
@@ -18,6 +19,7 @@ const LOGOUT_API_URL = "/api/auth/logout";
 export default function UserProfileData() {
   const user = useUser();
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showError, setShowError] = useState("");
 
   async function handleUserDelete() {
     if (
@@ -29,6 +31,7 @@ export default function UserProfileData() {
     }
 
     try {
+      setShowError("");
       const petsResponse = await fetch (`${PETS_API_URL}?user_id=${user._id}`);
       const petsArray = await petsResponse.json();
 
@@ -50,6 +53,7 @@ export default function UserProfileData() {
       window.location.href = LOGOUT_API_URL;
     } catch (error) {
       console.log(error.message);
+      setShowError(error.message);
     }
   } 
 
@@ -90,6 +94,7 @@ export default function UserProfileData() {
             Delete
           </button>
       </div>
+      {showError && (<ErrorMessage msg={{ msg: showError }}/>)}
     </div>
   );
 }

@@ -11,6 +11,7 @@ import { useUser } from "../context/UserContext.jsx";
 import PetRow from "./PetRow.jsx";
 import PetAddModal from "./PetAddModal.jsx";
 import PetSearch from "./PetSearch.jsx";
+import ErrorMessage from "./ErrorMessage.jsx";
 
 import "./PetTable.css";
 
@@ -21,6 +22,7 @@ export default function PetTable() {
   const [pets, setPets] = useState([]);
   const [petSearch, setPetSearch] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showError, setShowError] = useState("");
 
   useEffect(() => {
     if (!user?._id) return;
@@ -54,14 +56,15 @@ export default function PetTable() {
       return;
     }
     try {
+      setShowError("");
       const res = await fetch(`${PETS_API_URL}/${petId}`, { method: "DELETE" });
       if (!res.ok) {
         throw new Error("Could not delete pet.");
       }
       setPets((prevPets) => prevPets.filter((p) => p._id !== petId));
     } catch (error) {
-      console.error(error);
-      //TODO: error handling component here
+      console.error(error.message);
+      setShowError(error.message)
     }
   }
 
@@ -91,6 +94,8 @@ export default function PetTable() {
           )}
         </span>
       </div>
+
+      {showError && (<ErrorMessage msg={{ msg: showError}} />)}
 
       <div className="pets-table-wrapper">
         <table className="pets-table">

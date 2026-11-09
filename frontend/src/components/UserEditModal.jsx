@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 
 import { useUser, useSetUser } from "../context/UserContext.jsx";
 import "./UserEditModal.css";
+import ErrorMessage from "./ErrorMessage.jsx";
 
 const USERS_API_URL = "/api/users";
 
@@ -31,6 +32,7 @@ export default function UserEditModal({ title, message, onCancel }) {
     email: user.email || "",
     owner: Boolean(user.owner),
   });
+  const [showError, setShowError] = useState("");
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -41,6 +43,7 @@ export default function UserEditModal({ title, message, onCancel }) {
     event.preventDefault();
 
     try {
+      setShowError("");
       const editResponse = await fetch(`${USERS_API_URL}/${user._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json"},
@@ -57,6 +60,7 @@ export default function UserEditModal({ title, message, onCancel }) {
       onCancel();
     } catch (error) {
         console.error(error.message);
+        setShowError(error.message);
     }
   }
 
@@ -212,6 +216,7 @@ export default function UserEditModal({ title, message, onCancel }) {
             />
             </div>
         </div>
+        {showError && (<ErrorMessage msg={{ msg: showError }}/>)}
         <div className="modal-actions">
           <button type="submit">Confirm</button>
           <button type="button" onClick={onCancel}>Cancel</button>

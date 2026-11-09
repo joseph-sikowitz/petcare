@@ -8,6 +8,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
+import ErrorMessage from "./ErrorMessage";
 import "./PetEditModal.css";
 
 const PETS_API_URL = "/api/pets";
@@ -17,9 +18,12 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
     name: pet.name || "",
     species: pet.species || "",
     breed: pet.breed || "",
-    medicines: pet.medicines.join(", ") || "",
-    birthdate: new Date(pet.birthdate).toISOString().split("T")[0] || "",
+    medicines: (pet.medicines ?? []).join(", "),
+    birthdate: pet.birthdate && !isNaN(new Date(pet.birthdate))
+               ? new Date(pet.birthdate).toISOString().split("T")[0] || ""
+               : ""
   });
+  const [showError, setShowError] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -30,6 +34,7 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
     event.preventDefault();
 
     try {
+      setShowError("");
       const payload = {
         ...formData,
         medicines: formData.medicines
@@ -39,7 +44,7 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
         birthdate: formData.birthdate || null
       }
 
-      if (payload.birthdate === "Invalid Date") {
+      if (payload.birthdate === null) {
         payload.birthdate = new Date();
       }
 
@@ -59,7 +64,7 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
       onCancel();
     } catch (error) {
         console.error(error.message);
-        //TODO: add error component
+        setShowError(error.message);
     }
   }
 
@@ -133,6 +138,7 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
             />
             </div>
         </div>
+        {showError && (<ErrorMessage msg={{ msg: showError }} />)}
         <div className="modal-actions">
           <button type="submit">Confirm</button>
           <button type="button" onClick={onCancel}>Cancel</button>
@@ -143,11 +149,12 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
   );
 }
 
-PetEditModal.PropTypes = {
+PetEditModal.propTypes = {
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
   pet: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       species: PropTypes.string.isRequired,
       breed: PropTypes.string.isRequired,
@@ -157,6 +164,6 @@ PetEditModal.PropTypes = {
       birthdate: PropTypes.string,
       user_id: PropTypes.string
     }
-  ),
+  ).isRequired,
   setPets: PropTypes.func.isRequired
 };

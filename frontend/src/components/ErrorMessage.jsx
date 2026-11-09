@@ -15,6 +15,8 @@ export default function ErrorMessage(msg) {
   );
 }
 
-ErrorMessage.PropTypes = {
-  msg: PropTypes.string.isRequired
+ErrorMessage.propTypes = {
+  msg: PropTypes.shape({
+    msg: PropTypes.string.isRequired
+}).isRequired
 }
