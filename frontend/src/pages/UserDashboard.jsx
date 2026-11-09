@@ -12,7 +12,7 @@ import { useUser } from "../context/UserContext.jsx";
 import UserProfileData from "../components/UserProfileData.jsx";
 import PetTable from "../components/PetTable.jsx";
 
-function UserProfile() {
+export default function UserDashboard() {
   const user = useUser();
 
   return (
@@ -25,5 +25,3 @@ function UserProfile() {
     </main>
   );
 }
-
-export default UserProfile;

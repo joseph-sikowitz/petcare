@@ -13,3 +13,7 @@ div.dashboard-page {
 div.dashboard-page > h1 {
   text-align: center;
 }
+
+div.dashboard-page > p {
+  text-align: center;
+}
