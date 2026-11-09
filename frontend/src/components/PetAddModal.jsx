@@ -9,8 +9,8 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 import { useUser } from "../context/UserContext.jsx";
-
 import "./PetAddModal.css";
+import ErrorMessage from "./ErrorMessage.jsx";
 
 const PETS_API_URL = "/api/pets";
 
@@ -25,6 +25,7 @@ export default function PetAddModal({ title, message, onCancel, setPets }) {
     birthdate: "",
     user_id: user._id,
   });
+  const [showError, setShowError] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -35,6 +36,8 @@ export default function PetAddModal({ title, message, onCancel, setPets }) {
     event.preventDefault();
 
     try {
+      setShowError("");
+
       if (!formData.user_id) throw new Error("User ID required to create pet.");
       
       const payload = {
@@ -63,7 +66,7 @@ export default function PetAddModal({ title, message, onCancel, setPets }) {
       onCancel();
     } catch (error) {
         console.error(error.message);
-        //TODO: add error handling component here
+        setShowError(error.message)
     }
   }
 
@@ -137,6 +140,7 @@ export default function PetAddModal({ title, message, onCancel, setPets }) {
             />
             </div>
         </div>
+        {showError && (<ErrorMessage msg={{ msg: showError }} />)}
         <div className="modal-actions">
           <button type="submit">Confirm</button>
           <button type="button" onClick={onCancel}>Cancel</button>
