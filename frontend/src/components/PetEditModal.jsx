@@ -13,21 +13,28 @@ import "./PetEditModal.css";
 
 const PETS_API_URL = "/api/pets";
 
-export default function PetEditModal({ title, message, onCancel, pet, setPets }) {  
+export default function PetEditModal({
+  title,
+  message,
+  onCancel,
+  pet,
+  setPets,
+}) {
   const [formData, setFormData] = useState({
     name: pet.name || "",
     species: pet.species || "",
     breed: pet.breed || "",
     medicines: (pet.medicines ?? []).join(", "),
-    birthdate: pet.birthdate && !isNaN(new Date(pet.birthdate))
-               ? new Date(pet.birthdate).toISOString().split("T")[0] || ""
-               : ""
+    birthdate:
+      pet.birthdate && !isNaN(new Date(pet.birthdate))
+        ? new Date(pet.birthdate).toISOString().split("T")[0] || ""
+        : "",
   });
   const [showError, setShowError] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setFormData((previous) => ({ ...previous, [name]: value}));
+    setFormData((previous) => ({ ...previous, [name]: value }));
   }
 
   async function handleSubmit(event) {
@@ -41,8 +48,8 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
           .split(",")
           .map((m) => m.trim())
           .filter(Boolean),
-        birthdate: formData.birthdate || null
-      }
+        birthdate: formData.birthdate || null,
+      };
 
       if (payload.birthdate === null) {
         payload.birthdate = new Date();
@@ -50,21 +57,23 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
 
       const res = await fetch(`${PETS_API_URL}/${pet._id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
-        throw new Error ("Could not update pet.");
+        throw new Error("Could not update pet.");
       }
 
       const updatedPet = await res.json();
-      
-      setPets(prevPets => prevPets.map(p => p._id === pet._id ? { ...p, ...updatedPet } : p));
+
+      setPets((prevPets) =>
+        prevPets.map((p) => (p._id === pet._id ? { ...p, ...updatedPet } : p)),
+      );
       onCancel();
     } catch (error) {
-        console.error(error.message);
-        setShowError(error.message);
+      console.error(error.message);
+      setShowError(error.message);
     }
   }
 
@@ -79,71 +88,75 @@ export default function PetEditModal({ title, message, onCancel, pet, setPets })
         <h2>{title}</h2>
         <p>{message}</p>
         <form onSubmit={handleSubmit}>
-        <div className="modal-form-grid">
-          <div className="modal-field">
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+          <div className="modal-form-grid">
+            <div className="modal-field">
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="modal-field">
+              <label htmlFor="species">Species</label>
+              <input
+                id="species"
+                name="species"
+                type="text"
+                value={formData.species}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="modal-field">
+              <label htmlFor="breed">Breed</label>
+              <input
+                id="breed"
+                name="breed"
+                type="text"
+                value={formData.breed}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="modal-field">
+              <label htmlFor="medicines">
+                Medicines (comma separated list)
+              </label>
+              <input
+                id="medicines"
+                name="medicines"
+                type="text"
+                value={formData.medicines}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="modal-field">
+              <label htmlFor="birthdate">Birthdate</label>
+              <input
+                id="birthdate"
+                name="birthdate"
+                type="date"
+                value={formData.birthdate}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-
-          <div className="modal-field">
-            <label htmlFor="species">Species</label>
-            <input
-              id="species"
-              name="species"
-              type="text"
-              value={formData.species}
-              onChange={handleChange}
-              required
-            />
+          {showError && <ErrorMessage msg={{ msg: showError }} />}
+          <div className="modal-actions">
+            <button type="submit">Confirm</button>
+            <button type="button" onClick={onCancel}>
+              Cancel
+            </button>
           </div>
-
-            <div className="modal-field">
-            <label htmlFor="breed">Breed</label>
-            <input
-              id="breed"
-              name="breed"
-              type="text"
-              value={formData.breed}
-              onChange={handleChange}
-              required
-            />
-            </div>
-
-            <div className="modal-field">
-            <label htmlFor="medicines">Medicines (comma separated list)</label>
-            <input
-              id="medicines"
-              name="medicines"
-              type="text"
-              value={formData.medicines}
-              onChange={handleChange}
-            />
-            </div>
-
-            <div className="modal-field">
-            <label htmlFor="birthdate">Birthdate</label>
-            <input
-              id="birthdate"
-              name="birthdate"
-              type="date"
-              value={formData.birthdate}
-              onChange={handleChange}
-            />
-            </div>
-        </div>
-        {showError && (<ErrorMessage msg={{ msg: showError }} />)}
-        <div className="modal-actions">
-          <button type="submit">Confirm</button>
-          <button type="button" onClick={onCancel}>Cancel</button>
-        </div>
-      </form>
+        </form>
       </div>
     </div>
   );
@@ -154,16 +167,13 @@ PetEditModal.propTypes = {
   message: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
   pet: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      species: PropTypes.string.isRequired,
-      breed: PropTypes.string.isRequired,
-      medicines: PropTypes.arrayOf(
-        PropTypes.string
-      ),
-      birthdate: PropTypes.string,
-      user_id: PropTypes.string
-    }
-  ).isRequired,
-  setPets: PropTypes.func.isRequired
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    species: PropTypes.string.isRequired,
+    breed: PropTypes.string.isRequired,
+    medicines: PropTypes.arrayOf(PropTypes.string),
+    birthdate: PropTypes.string,
+    user_id: PropTypes.string,
+  }).isRequired,
+  setPets: PropTypes.func.isRequired,
 };

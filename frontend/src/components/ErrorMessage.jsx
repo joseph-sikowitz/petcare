@@ -10,13 +10,11 @@ import PropTypes from "prop-types";
 import "./ErrorMessage.css";
 
 export default function ErrorMessage(msg) {
-  return (
-    <div className="alert warning">{msg.msg.replace(/'/g, '')}</div>
-  );
+  return <div className="alert warning">{msg.msg.replace(/'/g, "")}</div>;
 }
 
 ErrorMessage.propTypes = {
   msg: PropTypes.shape({
-    msg: PropTypes.string.isRequired
-}).isRequired
-}
+    msg: PropTypes.string.isRequired,
+  }).isRequired,
+};

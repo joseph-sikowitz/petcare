@@ -32,21 +32,25 @@ export default function UserProfileData() {
 
     try {
       setShowError("");
-      const petsResponse = await fetch (`${PETS_API_URL}?user_id=${user._id}`);
+      const petsResponse = await fetch(`${PETS_API_URL}?user_id=${user._id}`);
       const petsArray = await petsResponse.json();
 
       if (petsArray.length !== 0) {
         petsArray.forEach(async (pet) => {
-          const res = await fetch(`${PETS_API_URL}/${pet._id}`, { method: "DELETE" });
+          const res = await fetch(`${PETS_API_URL}/${pet._id}`, {
+            method: "DELETE",
+          });
           if (!res.ok) {
             throw new Error("Failed to delete pet associated with user");
           }
         });
       }
 
-      const deleteResponse = await fetch(`${USERS_API_URL}/${user._id}`, { method: "DELETE" });
+      const deleteResponse = await fetch(`${USERS_API_URL}/${user._id}`, {
+        method: "DELETE",
+      });
 
-      if(!deleteResponse.ok) {
+      if (!deleteResponse.ok) {
         throw new Error("Failed to delete user account");
       }
 
@@ -55,7 +59,7 @@ export default function UserProfileData() {
       console.log(error.message);
       setShowError(error.message);
     }
-  } 
+  }
 
   return (
     <div className="petcare-card profile-card">
@@ -68,34 +72,37 @@ export default function UserProfileData() {
       {user.phoneNumber ? <p>Phone Number: {user.phoneNumber}</p> : null}
       {user.businessName && user.owner ? (
         <p>Business: {user.businessName}</p>
-      ) : (
-        null
-      )}
+      ) : null}
       {user.addressLine1 && user.city && user.state && user.zipCode ? (
         <p>
           Address: {user.addressLine1} {user.addressLine2} {user.city}{" "}
           {user.state} {user.zipCode}
         </p>
-      ) : (
-        null
-      )}
+      ) : null}
       <div className="profile-btn-group">
-          <button className="profile-btn profile-btn-primary" type="button" onClick={() => setShowEditModal(true)}>
-            Edit
-          </button>
-          {showEditModal && (
-            <UserEditModal
-              title="Edit account"
-              message="Make changes to your account here."
-              onCancel={() => setShowEditModal(false)}
-            />
-          )}
-          <button className="profile-btn profile-btn-primary" type="button" onClick={handleUserDelete}>
-            Delete
-          </button>
+        <button
+          className="profile-btn profile-btn-primary"
+          type="button"
+          onClick={() => setShowEditModal(true)}
+        >
+          Edit
+        </button>
+        {showEditModal && (
+          <UserEditModal
+            title="Edit account"
+            message="Make changes to your account here."
+            onCancel={() => setShowEditModal(false)}
+          />
+        )}
+        <button
+          className="profile-btn profile-btn-primary"
+          type="button"
+          onClick={handleUserDelete}
+        >
+          Delete
+        </button>
       </div>
-      {showError && (<ErrorMessage msg={{ msg: showError }}/>)}
+      {showError && <ErrorMessage msg={{ msg: showError }} />}
     </div>
   );
 }
-

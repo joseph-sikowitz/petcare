@@ -14,4 +14,4 @@ export const useUser = () => {
 
 export const useSetUser = () => {
   return useContext(SetUserContext);
-}
+};

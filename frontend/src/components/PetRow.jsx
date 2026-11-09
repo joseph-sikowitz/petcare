@@ -25,39 +25,45 @@ export default function PetRow({ pet, onDelete, setPets }) {
 
   return (
     <tr className="petcare-card">
-        <td>{name || "None"}</td>
-        <td>{species || "None"}</td>
-        <td>{breed || "None"}</td>
-        <td>{medicines.length > 0 ? medicines.join(", ") : "None"}</td>
-        <td>{birthdate ? new Date(birthdate).toLocaleDateString(undefined, { timeZone: "UTC" }) : "None"}</td>
-        <td className="btn-cell">
-          <div className="pets-row-actions">
-            <button
-              className="pets-btn pets-btn-edit"
-              type="button"
-              onClick={() => setShowEditModal(true)}
-            >
-              Edit
-            </button>
-            {showEditModal && (
-                        <PetEditModal
-                          title="Edit pet"
-                          message="Make changes to your pet's profile here."
-                          onCancel={() => setShowEditModal(false)}
-                          pet={pet}
-                          setPets={setPets}
-                        />
-                      )}
+      <td>{name || "None"}</td>
+      <td>{species || "None"}</td>
+      <td>{breed || "None"}</td>
+      <td>{medicines.length > 0 ? medicines.join(", ") : "None"}</td>
+      <td>
+        {birthdate
+          ? new Date(birthdate).toLocaleDateString(undefined, {
+              timeZone: "UTC",
+            })
+          : "None"}
+      </td>
+      <td className="btn-cell">
+        <div className="pets-row-actions">
+          <button
+            className="pets-btn pets-btn-edit"
+            type="button"
+            onClick={() => setShowEditModal(true)}
+          >
+            Edit
+          </button>
+          {showEditModal && (
+            <PetEditModal
+              title="Edit pet"
+              message="Make changes to your pet's profile here."
+              onCancel={() => setShowEditModal(false)}
+              pet={pet}
+              setPets={setPets}
+            />
+          )}
 
-            <button
-              className="pets-btn pets-btn-delete"
-              type="button"
-              onClick={() => onDelete(_id)}
-            >
-              Delete
-            </button>
-          </div>
-        </td>
+          <button
+            className="pets-btn pets-btn-delete"
+            type="button"
+            onClick={() => onDelete(_id)}
+          >
+            Delete
+          </button>
+        </div>
+      </td>
     </tr>
   );
 }
@@ -67,12 +73,10 @@ PetRow.propTypes = {
     name: PropTypes.string.isRequired,
     species: PropTypes.string.isRequired,
     breed: PropTypes.string.isRequired,
-    medicines: PropTypes.arrayOf(
-      PropTypes.string
-    ),
+    medicines: PropTypes.arrayOf(PropTypes.string),
     birthdate: PropTypes.string,
-    user_id: PropTypes.string
+    user_id: PropTypes.string,
   }),
   onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
 };

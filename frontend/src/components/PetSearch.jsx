@@ -21,5 +21,5 @@ export default function PetSearch({ petSearch, setPetSearch }) {
 
 PetSearch.propTypes = {
   petSearch: PropTypes.string.isRequired,
-  setPetSearch: PropTypes.func.isRequired
-}
+  setPetSearch: PropTypes.func.isRequired,
+};

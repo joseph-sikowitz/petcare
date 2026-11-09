@@ -47,7 +47,7 @@ export default function UserRegisterForm() {
             />
           </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="lastName">Last Name</label>
             <input
               id="lastName"
@@ -56,9 +56,9 @@ export default function UserRegisterForm() {
               placeholder="Enter last name"
               required
             />
-            </div>
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="businessName">Business Name</label>
             <input
               id="businessName"
@@ -66,9 +66,9 @@ export default function UserRegisterForm() {
               type="text"
               placeholder="Enter business name"
             />
-            </div>
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="addressLine1">Address Line 1</label>
             <input
               id="addressLine1"
@@ -76,9 +76,9 @@ export default function UserRegisterForm() {
               type="text"
               placeholder="Enter address line 1"
             />
-            </div>
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="addressLine2">Address Line 2</label>
             <input
               id="addressLine2"
@@ -86,19 +86,14 @@ export default function UserRegisterForm() {
               type="text"
               placeholder="Enter address line 2"
             />
-            </div>
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="city">City</label>
-            <input
-              id="city"
-              name="city"
-              type="text"
-              placeholder="Enter city"
-            />
-            </div>
+            <input id="city" name="city" type="text" placeholder="Enter city" />
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="state">State</label>
             <input
               id="state"
@@ -106,9 +101,9 @@ export default function UserRegisterForm() {
               type="text"
               placeholder="Enter state"
             />
-            </div>
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="zipCode">Zipcode</label>
             <input
               id="zipCode"
@@ -120,9 +115,9 @@ export default function UserRegisterForm() {
               autoComplete="postal-code"
               placeholder="Enter zipcode"
             />
-            </div>
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="phoneNumber">Phone Number</label>
             <input
               id="phoneNumber"
@@ -131,9 +126,9 @@ export default function UserRegisterForm() {
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               placeholder="Enter phone number"
             />
-            </div>
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -142,16 +137,12 @@ export default function UserRegisterForm() {
               placeholder="Enter email"
               required
             />
-            </div>
+          </div>
 
-            <div className="userregister-field">
+          <div className="userregister-field">
             <label htmlFor="owner">Business owner</label>
-            <input
-              id="owner"
-              name="owner"
-              type="checkbox"
-            />
-            </div>
+            <input id="owner" name="owner" type="checkbox" />
+          </div>
 
           <div className="userregister-form-actions">
             <button
@@ -166,4 +157,3 @@ export default function UserRegisterForm() {
     </div>
   );
 }
-

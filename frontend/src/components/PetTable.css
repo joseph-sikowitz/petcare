@@ -93,7 +93,12 @@
 }
 
 @media screen and (max-width: 768px) {
-  table, thead, tbody, th, td, tr {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
     display: block;
   }
 

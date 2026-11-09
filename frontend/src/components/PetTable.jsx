@@ -46,7 +46,7 @@ export default function PetTable() {
   }, [user?._id]);
 
   const visiblePets = pets.filter((p) =>
-    p.name.toLowerCase().includes(petSearch.toLowerCase())
+    p.name.toLowerCase().includes(petSearch.toLowerCase()),
   );
 
   async function onDelete(petId) {
@@ -64,7 +64,7 @@ export default function PetTable() {
       setPets((prevPets) => prevPets.filter((p) => p._id !== petId));
     } catch (error) {
       console.error(error.message);
-      setShowError(error.message)
+      setShowError(error.message);
     }
   }
 
@@ -95,7 +95,7 @@ export default function PetTable() {
         </span>
       </div>
 
-      {showError && (<ErrorMessage msg={{ msg: showError}} />)}
+      {showError && <ErrorMessage msg={{ msg: showError }} />}
 
       <div className="pets-table-wrapper">
         <table className="pets-table">

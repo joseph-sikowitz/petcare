@@ -7,12 +7,12 @@
 
 import { useSearchParams } from "react-router";
 
-import ErrorMessage from "./ErrorMessage.jsx"
+import ErrorMessage from "./ErrorMessage.jsx";
 import "./UserLoginForm.css";
 
 export default function UserLoginForm() {
   const [msgParams] = useSearchParams();
-  const msg = msgParams.get('msg');
+  const msg = msgParams.get("msg");
 
   return (
     <div className="petcare-card userlogin-form-card">
@@ -52,8 +52,10 @@ export default function UserLoginForm() {
           </div>
         </div>
       </form>
-      <p>No account? <a href="/register">Register here</a></p>
-      {msg ? (<ErrorMessage msg={msg} />) : null}
+      <p>
+        No account? <a href="/register">Register here</a>
+      </p>
+      {msg ? <ErrorMessage msg={msg} /> : null}
     </div>
   );
 }
