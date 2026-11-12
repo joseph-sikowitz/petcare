@@ -5,8 +5,6 @@
   User profile data component
 */
 
-// eslint-disable-next-line no-unused-vars
-import PropTypes from 'prop-types';
 import { useUser } from "../context/UserContext.jsx";
 import { useState } from "react";
 

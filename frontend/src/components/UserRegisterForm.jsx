@@ -5,9 +5,6 @@
   User register form component
 */
 
-// eslint-disable-next-line no-unused-vars
-import PropTypes from 'prop-types';
-
 import "./UserRegisterForm.css";
 
 export default function UserRegisterForm() {

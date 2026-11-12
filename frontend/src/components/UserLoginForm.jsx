@@ -5,8 +5,6 @@
   User login form component
 */
 
-// eslint-disable-next-line no-unused-vars
-import PropTypes from 'prop-types';
 import { useSearchParams } from "react-router";
 
 import ErrorMessage from "./ErrorMessage.jsx";

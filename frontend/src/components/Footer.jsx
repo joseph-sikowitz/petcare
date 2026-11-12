@@ -20,4 +20,6 @@ function Footer() {
   );
 }
 
+Footer.propTypes = {}
+
 export default Footer;
