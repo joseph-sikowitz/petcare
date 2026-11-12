@@ -18,7 +18,7 @@ export default function UserDashboard() {
   return (
     <main className="petcare-page">
       <div className="dashboard-page">
-        <h1>User Dashboard</h1>
+        <h1>User Profile & Pet Management</h1>
         {user ? <UserProfileData /> : <p>Not logged in</p>}
         {user ? <PetTable /> : null}
       </div>
