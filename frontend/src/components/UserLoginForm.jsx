@@ -47,7 +47,7 @@ export default function UserLoginForm() {
               className="userlogin-btn userlogin-btn-primary"
               type="submit"
             >
-              Login
+              Log In
             </button>
           </div>
         </div>
