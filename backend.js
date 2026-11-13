@@ -29,11 +29,11 @@ app.use(express.urlencoded({ extended: true }));
 // Session config
 app.use(
   session({
-    secret: "put-secret-key-here",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false, // TODO: set to true in prod
+      secure: true,
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     },
