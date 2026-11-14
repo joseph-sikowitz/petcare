@@ -274,6 +274,10 @@ The following prompts were documented during PetCare development. AI-generated o
 
 > Use the same structure as my Mountain Explorer README to prepare the PetCare README. Include both authors and documented project features, and use placeholders for information that has not been verified. Include the AI prompts used during development.
 
+### ChatGPT — Appointments Sample Data
+
+> Attached are the users collection, the pets collection and the services collection data file. The pets is linked to the user through the pets.user_id, which should match to the users._id. Help me to create 1200 of appointments for the appointments collection. The appointments collection will have the fields: user_id (This user_id can get from pets.user_id), pet_id (This can get from pets._id),  service_id (this can get from services._id), startTime, status (Scheduled, Completed, Cancelled), notes (Optional, but try to put in something that relevant to the appointment or the pet).Use realistic appointment dates between January 1, 2026, and December 31, 2027 and the business hours between 8:00 AM and 6:00 PM. Distribute appointments across different dates, times, customers, pets and services. Include a realistic mixture of appointment statuses such as scheduled, completed and cancelled but only if these match the application's supported status values. Ensure the selected pet belongs to the selected customer. Ensure the selected service exists in the MongoDB services collection. Use the existing customer, pet, and service IDs. Do not invent IDs or create invalid references. Avoid duplicate appointments and overlapping appointments for the same pet. Do not include _id, because MongoDB will generate it automatically. Save the results as a valid JSON file named petcare_appointments_1200.json.
+
 ** Joe to add if needed **
 
 ## License
