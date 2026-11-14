@@ -136,21 +136,21 @@ The design document identifies these items as outside the approved scope:
 
 ### Home Page
 
-[PLACEHOLDER}
+![Home Page](frontend/public/HomePage.png)
 
 ### Business Owner Interface (Thai Ken Yong)
 
 #### Business Dashboard
 
-[PLACEHOLDER}
+![Business Dashboard](frontend/public/BusinessDashboard.png)
 
 #### Service Management
 
-[PLACEHOLDER}
+![Service Management](frontend/public/ServiceManagement.png)
 
 #### Appointment Management
 
-[PLACEHOLDER}
+![Appointment Management](frontend/public/AppointmentManagement.png)
 
 ### Client Interface (Joseph Sikowitz)
 

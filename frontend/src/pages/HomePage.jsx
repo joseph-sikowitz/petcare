@@ -8,7 +8,7 @@
 import { Link } from "react-router";
 import "./HomePage.css";
 
-export default function HomePage() {
+function HomePage() {
   return (
     <main className="petcare-page home-page">
       <section className="home-hero">
@@ -44,3 +44,7 @@ export default function HomePage() {
     </main>
   );
 }
+
+HomePage.propTypes = {};
+
+export default HomePage;

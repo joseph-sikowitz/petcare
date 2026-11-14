@@ -68,4 +68,6 @@ function BusinessServiceViewOnly() {
   );
 }
 
+BusinessServiceViewOnly.propTypes = {};
+
 export default BusinessServiceViewOnly;

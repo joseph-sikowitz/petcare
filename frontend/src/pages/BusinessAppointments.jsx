@@ -463,4 +463,6 @@ function BusinessAppointments() {
   );
 }
 
+BusinessAppointments.propTypes = {};
+
 export default BusinessAppointments;

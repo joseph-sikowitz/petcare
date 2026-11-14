@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import PropTypes from "prop-types";
 
 import { useState, useEffect } from "react";
 
@@ -42,5 +43,9 @@ function App({ children }) {
     </UserContext.Provider>
   );
 }
+
+App.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default App;

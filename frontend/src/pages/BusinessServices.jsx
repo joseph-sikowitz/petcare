@@ -44,7 +44,7 @@ function BusinessServices() {
       if (!Array.isArray(data)) {
         throw new Error("Unexpected services response");
       }
-      setServices(data);
+      setServices([...data].sort((a, b) => a.name.localeCompare(b.name)));
       return true;
     } catch (err) {
       setError(err.message);
@@ -252,5 +252,7 @@ function BusinessServices() {
     </section>
   );
 }
+
+BusinessServices.propTypes = {};
 
 export default BusinessServices;

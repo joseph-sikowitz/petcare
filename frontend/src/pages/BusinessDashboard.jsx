@@ -9,7 +9,7 @@ import { Navigate } from "react-router";
 import { useUser } from "../context/UserContext.jsx";
 import "./BusinessDashboard.css";
 
-export default function BusinessDashboard() {
+function BusinessDashboard() {
   const user = useUser();
 
   if (user === undefined) {
@@ -26,7 +26,7 @@ export default function BusinessDashboard() {
 
   return (
     <section className="business-dashboard">
-      <h1>Welcome, Employee!</h1>
+      <h1>Business Dashboard</h1>
 
       <div className="dashboard-actions">
         <a href="/business/appointments">Manage Appointments</a>
@@ -35,3 +35,7 @@ export default function BusinessDashboard() {
     </section>
   );
 }
+
+BusinessDashboard.propTypes = {};
+
+export default BusinessDashboard;
