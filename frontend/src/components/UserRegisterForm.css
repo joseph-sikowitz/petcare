@@ -57,3 +57,8 @@
   color: #fff;
   transform: translateY(-1px);
 }
+.userregister-field--checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
