@@ -49,7 +49,7 @@ export default function PetAddModal({ title, message, onCancel, setPets }) {
       };
 
       if (payload.birthdate === "Invalid Date") {
-        payload.birthdate = new Date();
+        payload.birthdate = null;
       }
 
       const res = await fetch(`${PETS_API_URL}`, {
