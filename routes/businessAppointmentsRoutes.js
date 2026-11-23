@@ -51,7 +51,7 @@ router.get("/business/appointments", isAuthenticated, async (req, res) => {
       date,
       status,
       startTime,
-      endTime
+      endTime,
     );
     return res.json(appointments);
   } catch (error) {
@@ -65,6 +65,7 @@ router.get(
   "/business/appointments/customers",
   isAuthenticated,
   async (req, res) => {
+    // This check could be abstracted out, since it is repeated multiple times in this file.
     if (req.user?.owner !== true) {
       return res.status(403).json({
         error: "Business access required",
@@ -83,7 +84,7 @@ router.get(
       console.error("Error searching customers:", error);
       return res.status(500).json({ error: "Failed to search customers" });
     }
-  }
+  },
 );
 
 // READ: Retrieve pets belonging to a customer
@@ -109,7 +110,7 @@ router.get(
       console.error("Error retrieving pets:", error);
       return res.status(500).json({ error: "Failed to retrieve pets" });
     }
-  }
+  },
 );
 
 // CREATE: Add a new appointment
@@ -125,7 +126,7 @@ router.post("/business/appointments", isAuthenticated, async (req, res) => {
     // Validate input data
     if (
       ![user_id, pet_id, service_id].every(
-        (id) => typeof id === "string" && /^[0-9a-fA-F]{24}$/.test(id)
+        (id) => typeof id === "string" && /^[0-9a-fA-F]{24}$/.test(id),
       ) ||
       typeof startTime !== "string" ||
       !Number.isFinite(Date.parse(startTime)) ||
@@ -169,7 +170,7 @@ router.put("/business/appointments/:id", isAuthenticated, async (req, res) => {
     // Validate input data
     if (
       ![user_id, pet_id, service_id].every(
-        (value) => typeof value === "string" && /^[0-9a-fA-F]{24}$/.test(value)
+        (value) => typeof value === "string" && /^[0-9a-fA-F]{24}$/.test(value),
       ) ||
       typeof startTime !== "string" ||
       !Number.isFinite(Date.parse(startTime)) ||
@@ -230,7 +231,7 @@ router.delete(
       console.error("Error deleting appointment:", error);
       return res.status(500).json({ error: "Failed to delete appointment" });
     }
-  }
+  },
 );
 
 export default router;

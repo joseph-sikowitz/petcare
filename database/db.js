@@ -13,6 +13,7 @@ export default function database() {
   dotenv.config({ quiet: true });
 
   // The MongoDB connection is cached and reused across the application.
+  // The connection is not being reused, as you can see later in the code, new connections are being created.
   const client = new MongoClient(process.env.MONGODB_URI);
   let db;
 
