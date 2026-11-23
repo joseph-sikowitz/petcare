@@ -27,6 +27,8 @@ usersRouter.get("/users/count", async (req, res) => {
   }
 });
 
+// The user API does not have any login or ownership checks.
+// So I could just get a list of all the users if I wanted to, without any authentication.
 // GET users by query
 usersRouter.get("/users", async (req, res) => {
   try {
@@ -72,6 +74,7 @@ usersRouter.post("/users", async (req, res) => {
 // PUT existing user
 usersRouter.put("/users/:id", async (req, res) => {
   try {
+    // Prolly need to check other param cases such as duplicate usernames.
     // Check if passed ID is valid and throw 422 if not
     if (!ObjectId.isValid(req.params.id)) {
       const error = new Error("ObjectId invalid");
